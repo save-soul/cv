@@ -1,0 +1,42 @@
+---
+import type { SiteMeta } from '@/types'
+
+import BaseHead from '@/components/BaseHead.astro'
+import Footer from '@/components/layout/Footer.astro'
+import Header from '@/components/layout/Header.astro'
+import ThemeProvider from '@/components/ThemeProvider.astro'
+import { getCurrentLocale, getI18nText } from '@/utils/locale'
+
+import { siteConfig } from '@/site-config'
+
+interface Props {
+	meta: SiteMeta
+}
+
+const currentLocale = getCurrentLocale(Astro.url)
+const currentSiteConfig = siteConfig[currentLocale]
+
+const {
+	meta: { articleDate, description = currentSiteConfig.description, ogImage}
+} = Astro.props
+
+const pageTitle = getI18nText('site.title', currentLocale)
+const langCode = currentLocale === 'zh-cn' ? 'zh-CN' : 'en'
+---
+
+<html lang={langCode} class=''>
+	<head>
+		<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={pageTitle} currentLocale={currentLocale} />
+	</head>
+
+	<body class='flex justify-center bg-background'>
+		<ThemeProvider />
+		<main
+			class='flex min-h-screen w-screen max-w-[60rem] flex-col items-center px-6 pb-10 pt-7 font-satoshi text-[0.92rem] leading-relaxed sm:px-10 lg:px-10'
+		>
+			<Header />
+			<slot />
+			<Footer />
+		</main>
+	</body>
+</html>

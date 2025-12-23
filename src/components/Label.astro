@@ -1,0 +1,40 @@
+---
+import { cn } from '@/utils'
+import { getLocalizedResumeConfig, getCurrentLocale, getI18nText } from '@/utils/locale'
+
+const { class: className, as: Tag = 'div', title, href, id, ...props } = Astro.props
+const currentLocale = getCurrentLocale(Astro.url)
+const resumeConfig = getLocalizedResumeConfig(currentLocale)
+
+// 计算年龄
+function calculateAge(birthday: string): number {
+	const birthDate = new Date(birthday)
+	const today = new Date()
+	const yearDiff = today.getFullYear() - birthDate.getFullYear()
+	const monthDiff = today.getMonth() - birthDate.getMonth()
+	const dayDiff = today.getDate() - birthDate.getDate()
+	
+	// 如果还没到生日，年龄减1
+	return monthDiff < 0 || (monthDiff === 0 && dayDiff < 0) 
+		? yearDiff - 1 
+		: yearDiff
+}
+
+const age = id === 'age-label' ? calculateAge(resumeConfig.birthday) : null
+const ageUnit = getI18nText('common.ageUnit', currentLocale)
+---
+
+<Tag
+	class={cn(
+		className,
+		'flex flex-row items-center justify-center gap-x-2',
+		href && 'hover:opacity-75 transition-all'
+	)}
+	href={href}
+	id={id}
+	{...props}
+>
+	<slot name='icon' />
+	<p>{id === 'age-label' ? `${age}${ageUnit}` : title}</p>
+</Tag>
+

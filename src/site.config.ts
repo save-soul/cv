@@ -151,11 +151,10 @@ export const resumeConfig: ResumeConfig = {
 		},
 		now: {
 			reading: [
-				"《沧浪之水》[阎真]",
+				"《一只特立独行的猪》[王小波]",
 			],
 			sports: [
-				"跳绳",
-				"拉力绳"
+				"步行"
 			],
 			address: '中国上海市'
 		}
@@ -238,11 +237,10 @@ export const resumeConfig: ResumeConfig = {
 		},
 		now: {
 			reading: [
-				"Water of the Canglang River [Yan Zhen]",
+				"A Hog in a Million [Wang Xiaobo]",
 			],
 			sports: [
-				"Jump rope​​",
-				"Resistance band",
+				"hike​​"
 			],
 			address: 'China, Shanghai'
 		}

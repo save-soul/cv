@@ -154,7 +154,7 @@ export const resumeConfig: ResumeConfig = {
 				"《省委班子》[许开祯]",
 			],
 			sports: [
-				"步行"
+				"步行","跑步"
 			],
 			address: '中国河南省项城市'
 		}
@@ -240,7 +240,7 @@ export const resumeConfig: ResumeConfig = {
 				"A Provincial Party Committee Team [Xu Kaizhen]",
 			],
 			sports: [
-				"hike​​"
+				"hike​​","run"
 			],
 			address: 'Xiangcheng City, Henan Province, China'
 		}

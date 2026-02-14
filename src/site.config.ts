@@ -151,12 +151,12 @@ export const resumeConfig: ResumeConfig = {
 		},
 		now: {
 			reading: [
-				"《一只特立独行的猪》[王小波]",
+				"《省委班子》[许开祯]",
 			],
 			sports: [
 				"步行"
 			],
-			address: '中国上海市'
+			address: '中国河南省项城市'
 		}
 	},
 	en: {
@@ -237,12 +237,12 @@ export const resumeConfig: ResumeConfig = {
 		},
 		now: {
 			reading: [
-				"A Hog in a Million [Wang Xiaobo]",
+				"A Provincial Party Committee Team [Xu Kaizhen]",
 			],
 			sports: [
 				"hike​​"
 			],
-			address: 'China, Shanghai'
+			address: 'Xiangcheng City, Henan Province, China'
 		}
 	}
 }

@@ -1,5 +1,14 @@
 # Astro Resume
 
+## 项目来源与许可证
+本项目基于 [astro-theme-pure](https://github.com/cworld1/astro-theme-pure) 主题开发，原项目采用 **Apache License 2.0** 协议。
+
+**合规声明**：
+- 保留了完整的Apache-2.0许可证文件（`LICENSE-APACHE-2.0`）
+- 在所有修改过的文件中添加了修改声明
+- 在网站页脚明确标注了项目来源和许可证信息
+- 创建了详细的修改记录文件（`MODIFICATIONS.md`）
+
 ## Features
 
 - Astro v4
@@ -17,6 +26,7 @@
 
 ## Credits
 
+- [astro-theme-pure](https://github.com/cworld1/astro-theme-pure) - 基础主题（Apache License 2.0）
 - [astro-theme-cactus](https://github.com/chrismwilliams/astro-theme-cactus) for blog design
 - [minirezume-framer](https://minirezume.framer.website/) for resume homepage design
 

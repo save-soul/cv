@@ -1,3 +1,7 @@
+// 原项目：astro-theme-pure (Apache-2.0)
+// 原作者：cworld1 (https://github.com/cworld1)
+// 修改记录：
+// 2026-02-15 修改者：添加简历配置、国际化站点配置和菜单链接
 import type { ResumeConfig, LocalizedSiteConfig, LocalizedMenuLinks, RecordConfig } from '@/types'
 import type { AstroExpressiveCodeOptions } from 'astro-expressive-code'
 export const recordConfig: RecordConfig = {
@@ -303,6 +307,11 @@ export const menuLinks: LocalizedMenuLinks = {
 			title: '记录',
 			path: '/zh-cn/record',
 			isBlank: false
+		},
+		{
+			title: '关于',
+			path: '/zh-cn/about',
+			isBlank: false
 		}
 	],
 	en: [
@@ -314,6 +323,11 @@ export const menuLinks: LocalizedMenuLinks = {
 		{
 			title: 'Record',
 			path: '/record',
+			isBlank: false
+		},
+		{
+			title: 'About',
+			path: '/about',
 			isBlank: false
 		}
 	]

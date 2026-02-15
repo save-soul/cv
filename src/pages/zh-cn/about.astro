@@ -1,0 +1,106 @@
+---
+// 原项目：astro-theme-pure (Apache-2.0)
+// 原作者：cworld1 (https://github.com/cworld1)
+// 修改记录：
+// 2026-02-15 修改者：创建关于页面，声明项目来源和许可证信息
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { getCurrentLocale, getI18nText } from '@/utils/locale'
+
+const currentLocale = getCurrentLocale(Astro.url)
+---
+
+<BaseLayout meta={{
+  description: '了解本站基于astro-theme-pure主题开发，遵循Apache License 2.0协议，查看详细的修改记录和版权声明。'
+}}>
+  <div class="container mx-auto px-4 py-6 max-w-4xl">
+    <h2 class="text-2xl font-bold mb-4">关于本站</h2>
+    
+    <div class="prose dark:prose-invert max-w-none">
+      <section class="mb-10">
+        <h2 class="text-2xl font-semibold mb-4">项目来源</h2>
+        <p class="mb-4">
+          本站基于 <a href="https://github.com/cworld1/astro-theme-pure" target="_blank" class="text-primary underline hover:no-underline">astro-theme-pure</a> 主题开发，这是一个采用 <strong>Apache License 2.0</strong> 协议的开源项目。
+        </p>
+        <p class="mb-4">
+          原项目由 <a href="https://github.com/cworld1" target="_blank" class="text-primary underline hover:no-underline">cworld1</a> 创建和维护，提供了简洁、现代的Astro博客主题基础。
+        </p>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-semibold mb-4">许可证信息</h2>
+        <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
+          <h3 class="text-xl font-medium mb-3">Apache License 2.0</h3>
+          <p class="mb-4">
+            本项目遵循 <strong>Apache License 2.0</strong> 协议。这意味着您可以：
+          </p>
+          <ul class="list-disc pl-6 mb-4 space-y-2">
+            <li>自由使用、修改和分发本项目的代码</li>
+            <li>用于个人或商业目的</li>
+            <li>在遵守协议要求的前提下闭源使用</li>
+            <li>创建和分发衍生作品</li>
+          </ul>
+          <p class="mb-4">
+            完整的许可证文本可以在 <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" class="text-primary underline hover:no-underline">Apache官网</a> 查看，项目根目录也提供了完整的 <code>LICENSE-APACHE-2.0</code> 文件。
+          </p>
+        </div>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-semibold mb-4">合规要求</h2>
+        <p class="mb-4">
+          根据Apache License 2.0的要求，我们已采取以下措施确保合规：
+        </p>
+        <ul class="list-disc pl-6 mb-4 space-y-2">
+          <li>保留了完整的Apache-2.0许可证文件</li>
+          <li>在所有修改过的文件中添加了修改声明</li>
+          <li>保留了原作者的版权声明</li>
+          <li>在网站页脚明确标注了项目来源和许可证信息</li>
+          <li>创建了详细的修改记录文件（MODIFICATIONS.md）</li>
+        </ul>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-semibold mb-4">主要修改内容</h2>
+        <p class="mb-4">基于原主题，我们进行了以下主要修改：</p>
+        <ul class="list-disc pl-6 mb-4 space-y-2">
+          <li><strong>国际化支持</strong>：添加了中英文双语界面</li>
+          <li><strong>简历功能</strong>：重新设计了专业的简历展示页面</li>
+          <li><strong>组件重构</strong>：提取了可复用的基础组件</li>
+          <li><strong>样式优化</strong>：调整了颜色方案和布局设计</li>
+          <li><strong>功能增强</strong>：添加了更多交互元素和展示组件</li>
+          <li><strong>部署配置</strong>：优化了Cloudflare Pages部署配置</li>
+        </ul>
+        <p>
+          详细的修改记录请查看 <a href="/MODIFICATIONS.md" class="text-primary underline hover:no-underline">MODIFICATIONS.md</a> 文件。
+        </p>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-semibold mb-4">版权声明</h2>
+        <div class="border-l-4 border-primary pl-4 py-2">
+          <p class="mb-2">
+            <strong>原项目版权</strong>：astro-theme-pure 主题的原始代码版权归 <a href="https://github.com/cworld1" target="_blank" class="text-primary underline hover:no-underline">cworld1</a> 所有。
+          </p>
+          <p class="mb-2">
+            <strong>修改部分版权</strong>：本项目的修改和新增代码版权归修改者所有。
+          </p>
+          <p>
+            <strong>协议遵循</strong>：所有修改均严格遵循Apache License 2.0协议的要求进行标注和声明。
+          </p>
+        </div>
+      </section>
+
+      <section class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+        <h2 class="text-2xl font-semibold mb-4">联系方式</h2>
+        <p class="mb-4">
+          如果您对本项目的使用有任何疑问，或需要了解更多的许可证信息，请通过以下方式联系：
+        </p>
+        <ul class="list-none space-y-2">
+          <li>📧 邮箱：查看简历页面获取联系方式</li>
+          <li>🐙 GitHub：<a href="https://github.com/save-soul/cv" target="_blank" class="text-primary underline hover:no-underline">项目仓库</a></li>
+          <li>📄 许可证：<a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" class="text-primary underline hover:no-underline">Apache License 2.0</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</BaseLayout>

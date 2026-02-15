@@ -1,3 +1,7 @@
+/* 原项目：astro-theme-pure (Apache-2.0) */
+/* 原作者：cworld1 (https://github.com/cworld1) */
+/* 修改记录： */
+/* 2026-02-15 修改者：添加自定义字体、颜色主题和全局样式 */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -1,3 +1,7 @@
+// 原项目：astro-theme-pure (Apache-2.0)
+// 原作者：cworld1 (https://github.com/cworld1)
+// 修改记录：
+// 2026-02-15 修改者：添加国际化文本，包括页脚的原项目署名和协议信息
 export type Locale = 'en' | 'zh-cn'
 
 export const defaultLocale: Locale = 'en'
@@ -15,7 +19,9 @@ export const i18n = {
       builtWith: '使用',
       and: '和',
       built: '构建',
-      lastUpdated: '最后更新于'
+      lastUpdated: '最后更新于',
+      basedOn: '基于',
+      licensedUnder: '遵循'
     },
     // 章节标题
     sections: {
@@ -67,7 +73,9 @@ export const i18n = {
       builtWith: 'Built with',
       and: 'and',
       built: 'built',
-      lastUpdated: 'Last updated'
+      lastUpdated: 'Last updated',
+      basedOn: 'Based on',
+      licensedUnder: 'licensed under'
     },
     // Section titles
     sections: {

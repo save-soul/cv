@@ -1,3 +1,7 @@
+// 原项目：astro-theme-pure (Apache-2.0)
+// 原作者：cworld1 (https://github.com/cworld1)
+// 修改记录：
+// 2026-02-15 修改者：添加国际化工具函数，支持中英文切换
 import type { Locale, LocalizedResumeConfig } from '@/types'
 import { resumeConfig } from '../site.config'
 import { i18n, defaultLocale } from '@/i18n'

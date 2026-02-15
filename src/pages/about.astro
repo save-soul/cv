@@ -1,0 +1,105 @@
+---
+// Original project: astro-theme-pure (Apache-2.0)
+// Original author: cworld1 (https://github.com/cworld1)
+// Modification record:
+// 2026-02-15 Modifier: Created about page, declaring project source and license information
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { getCurrentLocale, getI18nText } from '@/utils/locale'
+
+const currentLocale = getCurrentLocale(Astro.url)
+---
+
+<BaseLayout meta={{
+  description: 'Learn about this site built on astro-theme-pure theme, following Apache License 2.0, view detailed modification records and copyright statements.'
+}}>
+  <div class="container mx-auto px-4 py-6 max-w-4xl">
+    <h2 class="text-2xl font-bold mb-4">About This Site</h2>
+    
+    <div class="prose dark:prose-invert max-w-none">
+      <section class="mb-10">
+        <h2 class="text-2xl font-semibold mb-4">Project Source</h2>
+        <p class="mb-4">
+          This site is built on the <a href="https://github.com/cworld1/astro-theme-pure" target="_blank" class="text-primary underline hover:no-underline">astro-theme-pure</a> theme, an open-source project licensed under <strong>Apache License 2.0</strong>.
+        </p>
+        <p class="mb-4">
+          The original project was created and maintained by <a href="https://github.com/cworld1" target="_blank" class="text-primary underline hover:no-underline">cworld1</a>, providing a clean, modern Astro blog theme foundation.
+        </p>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-semibold mb-4">License Information</h2>
+        <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
+          <h3 class="text-xl font-medium mb-3">Apache License 2.0</h3>
+          <p class="mb-4">
+            This project follows the <strong>Apache License 2.0</strong>. This means you can:
+          </p>
+          <ul class="list-disc pl-6 mb-4 space-y-2">
+            <li>Freely use, modify, and distribute the code of this project</li>
+            <li>Use it for personal or commercial purposes</li>
+            <li>Use it closed-source while complying with license requirements</li>
+            <li>Create and distribute derivative works</li>
+          </ul>
+          <p class="mb-4">
+            The complete license text can be viewed on the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" class="text-primary underline hover:no-underline">Apache official website</a>, and a complete <code>LICENSE-APACHE-2.0</code> file is also provided in the project root directory.
+          </p>
+        </div>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-semibold mb-4">Compliance Requirements</h2>
+        <p class="mb-4">
+          According to Apache License 2.0 requirements, we have taken the following measures to ensure compliance:
+        </p>
+        <ul class="list-disc pl-6 mb-4 space-y-2">
+          <li>Retained the complete Apache-2.0 license file</li>
+          <li>Added modification declarations to all modified files</li>
+          <li>Preserved the original author's copyright notices</li>
+          <li>Created a detailed modification record file (MODIFICATIONS.md)</li>
+        </ul>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-semibold mb-4">Main Modifications</h2>
+        <p class="mb-4">Based on the original theme, we have made the following main modifications:</p>
+        <ul class="list-disc pl-6 mb-4 space-y-2">
+          <li><strong>Internationalization Support</strong>: Added Chinese-English bilingual interface</li>
+          <li><strong>Resume Functionality</strong>: Redesigned professional resume display pages</li>
+          <li><strong>Component Refactoring</strong>: Extracted reusable base components</li>
+          <li><strong>Style Optimization</strong>: Adjusted color schemes and layout design</li>
+          <li><strong>Feature Enhancement</strong>: Added more interactive elements and display components</li>
+          <li><strong>Deployment Configuration</strong>: Optimized Cloudflare Pages deployment configuration</li>
+        </ul>
+        <p>
+          Detailed modification records can be viewed in the <a href="/MODIFICATIONS.md" class="text-primary underline hover:no-underline">MODIFICATIONS.md</a> file.
+        </p>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-2xl font-semibold mb-4">Copyright Statement</h2>
+        <div class="border-l-4 border-primary pl-4 py-2">
+          <p class="mb-2">
+            <strong>Original Project Copyright</strong>: The original code of the astro-theme-pure theme is copyrighted by <a href="https://github.com/cworld1" target="_blank" class="text-primary underline hover:no-underline">cworld1</a>.
+          </p>
+          <p class="mb-2">
+            <strong>Modified Parts Copyright</strong>: The modifications and newly added code in this project are copyrighted by the modifier.
+          </p>
+          <p>
+            <strong>License Compliance</strong>: All modifications strictly follow the requirements of the Apache License 2.0 for labeling and declaration.
+          </p>
+        </div>
+      </section>
+
+      <section class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+        <h2 class="text-2xl font-semibold mb-4">Contact Information</h2>
+        <p class="mb-4">
+          If you have any questions about the use of this project, or need more license information, please contact through the following ways:
+        </p>
+        <ul class="list-none space-y-2">
+          <li>📧 Email: Check the resume page for contact information</li>
+          <li>🐙 GitHub: <a href="https://github.com/save-soul/cv" target="_blank" class="text-primary underline hover:no-underline">Project Repository</a></li>
+          <li>📄 License: <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" class="text-primary underline hover:no-underline">Apache License 2.0</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</BaseLayout>

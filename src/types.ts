@@ -1,3 +1,7 @@
+// 原项目：astro-theme-pure (Apache-2.0)
+// 原作者：cworld1 (https://github.com/cworld1)
+// 修改记录：
+// 2026-02-15 修改者：添加类型定义，支持国际化配置和简历数据结构
 export type Language = {
 	lang: string
 	url: string

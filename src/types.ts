@@ -18,7 +18,7 @@ export type SiteConfig = {
 	}
 	blog: string
 	umamiID: string
-	otherLanguages:Language[]
+	otherLanguages: Language[]
 }
 
 export type LocalizedSiteConfig = {
@@ -29,6 +29,7 @@ export type LocalizedSiteConfig = {
 export type MenuLink = {
 	title: string
 	path: string
+	isBlank: boolean
 }
 
 export type LocalizedMenuLinks = {
@@ -44,30 +45,30 @@ export type LocalizedResumeConfig = {
 	address: string
 	email: string
 	about: string
-	experiences:{
+	experiences: {
 		company: string
 		image: string
 		imageAlt: string
 		office: string
 		date: string
-		charges:string[]
+		charges: string[]
 	}[]
-	educations:{
+	educations: {
 		school: string
 		image: string
 		imageAlt: string
-		major:string
+		major: string
 		date: string
-		knowledges:string[]
+		knowledges: string[]
 	}[]
-	projects:{
+	projects: {
 		title: string
 		description: string
 		image: string
 		imageAlt: string
 		link: string
 	}[]
-	certificates:{
+	certificates: {
 		title: string
 		date: string
 		description: string
@@ -75,13 +76,13 @@ export type LocalizedResumeConfig = {
 		imageAlt: string
 		link: string
 	}[]
-	skills:{
+	skills: {
 		language: string[]
 		frontend: string[]
 		backend: string[]
 		others: string[]
 	}
-	now:{
+	now: {
 		reading: string[]
 		sports: string[]
 		address: string
@@ -103,4 +104,16 @@ export type SiteMeta = {
 	description?: string
 	ogImage?: string | undefined
 	articleDate?: string | undefined
+}
+
+
+export type LocalizedRecordConfig = {
+	title: string
+	description: string
+	date: string
+}
+
+export type RecordConfig = {
+	'zh-cn': LocalizedRecordConfig[]
+	en: LocalizedRecordConfig[]
 }

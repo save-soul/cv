@@ -44,3 +44,21 @@ export function getI18nText(key: string, locale?: Locale): string {
 export function isCurrentLocale(locale: Locale): boolean {
   return getCurrentLocale() === locale
 }
+
+export function getAlternateLanguageUrl(currentUrl: URL): string {
+  const currentLocale = getCurrentLocale(currentUrl)
+  const pathname = currentUrl.pathname
+  
+  if (currentLocale === 'zh-cn') {
+    // Switch to English: remove /zh-cn prefix
+    if (pathname.startsWith('/zh-cn')) {
+      const newPath = pathname.replace('/zh-cn', '') || '/'
+      return newPath
+    }
+    return '/'
+  } else {
+    // Switch to Chinese: add /zh-cn prefix
+    const newPath = '/zh-cn' + (pathname === '/' ? '' : pathname)
+    return newPath
+  }
+}

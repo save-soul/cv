@@ -1,6 +1,51 @@
-import type { ResumeConfig, LocalizedSiteConfig } from '@/types'
+import type { ResumeConfig, LocalizedSiteConfig, MenuLink, LocalizedMenuLinks, RecordConfig } from '@/types'
 import type { AstroExpressiveCodeOptions } from 'astro-expressive-code'
-
+export const recordConfig: RecordConfig = {
+	'zh-cn': [
+		{
+			title: "入职",
+			description: "入职中国建筑土木建设有限公司",
+			date: "2022年7月"
+		},
+		{
+			title: "本科毕业",
+			description: "取得统招普通高等学校本科毕业证书、学士学位证书",
+			date: "2022年7月"
+		},
+		{
+			title: "参加高考",
+			description: "被河南理工大学交通工程专业录取",
+			date: "2018年6月7日-8日"
+		},
+		{
+			title: "出生",
+			description: "2000年8月18日凌晨3时出生",
+			date: "2000年8月18日"
+		}
+	],
+	en: [
+		{
+			title: "Career Start",
+			description: "Started career at China Construction Civil Engineering Co., Ltd.",
+			date: "July 2022"
+		},
+		{
+			title: "Undergraduate Graduation",
+			description: "Obtained undergraduate diploma and bachelor's degree certificate from a regular higher education institution",
+			date: "July 2022"
+		},
+		{
+			title: "Gaokao Participation",
+			description: "Admitted to the Transportation Engineering Program at Henan Polytechnic University",
+			date: "June 7-8, 2018"
+		},
+		{
+			title: "Birth",
+			description: "Born at 3:00 a.m. on August 18, 2000",
+			date: "August 18, 2000"
+		}
+	]
+}
 export const siteConfig: LocalizedSiteConfig = {
 	'zh-cn': {
 		// Used as both a meta property (src/components/BaseHead.astro L:31 + L:49) & the generated satori png (src/pages/og-image/[slug].png.ts)
@@ -77,7 +122,7 @@ export const resumeConfig: ResumeConfig = {
 		name: '赵文光',
 		gender: '男',
 		birthday: '2000/08/18',
-		about: '作为一名工地施工员，日复一日地验筋、协调班组、填写施工日志。这些琐碎而重复的工作，让我对现场的流程有了一定的了解，但也仅止于此。近年来，行业下行，项目减少，身边的同事陆续转行，留下的人则面临更重的任务与更不确定的未来。长期异地奔波，与家人聚少离多，让我不断质疑这份工作的意义。我看不清方向，也不知道该往哪里走。继续留在工地，体力和精力已不如从前；转行，又担心缺乏其他行业的技能。这种悬在半空的感觉，让我感到深深的疲惫和迷茫。',
+		about: '2000年8月18日生于河南项城，2018年参加高考并被河南理工大学交通工程专业录取，2022年完成全日制本科学业，取得普通高等学校本科毕业证书与学士学位证书。毕业后入职中国建筑土木建设有限公司担任施工员，负责道路、桥梁工程领域，核心负责项目内业资料的规范编制、整理归档与全流程管理，严格把控资料的准确性与完整性。',
 		job: '施工员',
 		address: '中国河南省项城市',
 		email: 'withzeal@outlook.com',
@@ -154,7 +199,7 @@ export const resumeConfig: ResumeConfig = {
 				"《省委班子》[许开祯]",
 			],
 			sports: [
-				"步行","跑步"
+				"步行", "跑步"
 			],
 			address: '中国河南省项城市'
 		}
@@ -163,7 +208,7 @@ export const resumeConfig: ResumeConfig = {
 		name: 'Zhao Wenguang',
 		gender: 'Male',
 		birthday: '2000/08/18',
-		about: 'As a construction site clerk, my days are filled with the repetitive tasks of checking reinforcements, coordinating with construction teams, and filling out construction logs. While these tasks have given me a certain understanding of on-site procedures, that’s about as far as it goes. In recent years, with the industry facing a downturn and fewer projects, colleagues around me have left one after another. Those who remain are burdened with heavier workloads and a more uncertain future. The long-term pattern of working away from home, with little time spent with family, constantly makes me question the meaning of this job. I can’t see a clear path forward. Staying on the construction site is becoming physically and mentally tougher as I’m not as resilient as I used to be; yet, transitioning to another field feels risky due to a lack of skills elsewhere. This feeling of being stuck in limbo leaves me deeply weary and lost.',
+		about: 'Born on August 18, 2000 in Xiangcheng, Henan Province. He took the National College Entrance Examination (Gaokao) in 2018 and was admitted to the Transportation Engineering major at Henan Polytechnic University. In 2022, he completed his full-time undergraduate studies and obtained the undergraduate diploma and bachelor\'s degree certificate from a regular higher education institution. After graduation, he joined China Construction Civil Engineering Co., Ltd. as a Construction Worker, focusing on the field of road and bridge engineering. His core responsibilities include the standardized compilation, sorting and archiving, as well as full-process management of project internal documentation, with strict control over the accuracy and completeness of all materials.',
 		job: 'Construction Worker',
 		address: 'Xiangcheng, Henan, China',
 		email: 'withzeal@outlook.com',
@@ -240,24 +285,36 @@ export const resumeConfig: ResumeConfig = {
 				"A Provincial Party Committee Team [Xu Kaizhen]",
 			],
 			sports: [
-				"hike​​","run"
+				"hike", "run"
 			],
 			address: 'Xiangcheng City, Henan Province, China'
 		}
 	}
 }
 
-export const menuLinks = {
+export const menuLinks: LocalizedMenuLinks = {
 	'zh-cn': [
 		{
 			title: '博客',
-			path: 'https://likeit.dev'
+			path: 'https://likeit.dev',
+			isBlank: true
+		},
+		{
+			title: '记录',
+			path: '/zh-cn/record',
+			isBlank: false
 		}
 	],
 	en: [
 		{
 			title: 'Blog',
-			path: 'https://likeit.dev'
+			path: 'https://likeit.dev',
+			isBlank: true
+		},
+		{
+			title: 'Record',
+			path: '/record',
+			isBlank: false
 		}
 	]
 }

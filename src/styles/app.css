@@ -64,9 +64,10 @@
 
 @layer base {
 	* {
-		@apply border-border;
+		@apply border-border box-border; /* 新增：box-border 统一盒模型 */
 	}
-	body {
-		@apply bg-background text-foreground;
+	html, body { /* 修改：从 body 扩展到 html, body */
+		@apply bg-background text-foreground overflow-x-hidden; /* 新增：overflow-x-hidden 防止横向溢出 */
+		scrollbar-gutter: stable; /* 核心：滚动条始终占位，消除居中偏移 */
 	}
 }

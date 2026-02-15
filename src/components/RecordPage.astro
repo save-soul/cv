@@ -1,0 +1,29 @@
+---
+import { recordConfig } from '@/site-config'
+import PageLayout from '@/layouts/BaseLayout.astro'
+import RecordCard from '@/components/RecordCard.astro'
+import { getCurrentLocale } from '@/utils/locale'
+import type { Locale } from '@/types'
+
+interface Props {
+  locale?: Locale
+}
+
+const { locale: propLocale } = Astro.props
+const currentLocale = propLocale || getCurrentLocale(Astro.url)
+const records = recordConfig[currentLocale]
+---
+
+<PageLayout meta={{}}>
+	<div class='flex w-full flex-col gap-y-10'>
+		{
+      records.map((record) => (
+        <RecordCard
+          heading={record.title}
+          subheading={record.description}
+          date={record.date}
+        />
+      ))
+    }
+	</div>
+</PageLayout>

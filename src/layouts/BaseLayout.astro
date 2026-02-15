@@ -24,7 +24,7 @@ const pageTitle = getI18nText('site.title', currentLocale)
 const langCode = currentLocale === 'zh-cn' ? 'zh-CN' : 'en'
 ---
 
-<html lang={langCode} class=''>
+<html lang={langCode} class='' transition:animate="fade">
 	<head>
 		<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={pageTitle} currentLocale={currentLocale} />
 	</head>
@@ -32,7 +32,7 @@ const langCode = currentLocale === 'zh-cn' ? 'zh-CN' : 'en'
 	<body class='flex justify-center bg-background'>
 		<ThemeProvider />
 		<main
-			class='flex min-h-screen w-screen max-w-[60rem] flex-col items-center px-6 pb-10 pt-7 font-satoshi text-[0.92rem] leading-relaxed sm:px-10 lg:px-10'
+			class='mx-auto flex min-h-screen w-screen max-w-[60rem] flex-col items-center px-6 pb-10 pt-7 font-satoshi text-[0.92rem] leading-relaxed sm:px-10 lg:px-10'
 		>
 			<Header />
 			<slot />

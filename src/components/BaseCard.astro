@@ -1,18 +1,8 @@
 ---
 import { cn } from '@/utils'
 
-interface Props {
-  as?: string
-  class?: string
-  href?: string
-  heading?: string
-  subheading?: string
-  date?: string
-  target?: string
-}
-
 const {
-  as: Tag = 'div',
+  as,
   class: className,
   href,
   heading,
@@ -20,6 +10,9 @@ const {
   date,
   target
 } = Astro.props
+
+// Automatically use 'a' tag when href is provided, unless explicitly overridden
+const Tag = href && !as ? 'a' : (as || 'div')
 ---
 
 <Tag

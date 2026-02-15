@@ -1,4 +1,4 @@
-import type { ResumeConfig, LocalizedSiteConfig, MenuLink, LocalizedMenuLinks, RecordConfig } from '@/types'
+import type { ResumeConfig, LocalizedSiteConfig, LocalizedMenuLinks, RecordConfig } from '@/types'
 import type { AstroExpressiveCodeOptions } from 'astro-expressive-code'
 export const recordConfig: RecordConfig = {
 	'zh-cn': [

@@ -23,6 +23,12 @@ export type SiteConfig = {
 	blog: string
 	umamiID: string
 	otherLanguages: Language[]
+	pageDescriptions?: {
+		home: string
+		record: string
+		read: string
+		about: string
+	}
 }
 
 export type LocalizedSiteConfig = {

@@ -26,7 +26,7 @@ const {
 
 // Determine page type based on URL path
 const pathname = Astro.url.pathname
-let pageType = 'home'
+let pageType: 'home' | 'record' | 'read' | 'about' = 'home'
 
 if (pathname.includes('/record')) {
   pageType = 'record'
@@ -40,12 +40,15 @@ if (pathname.includes('/record')) {
 
 // Get page-specific title
 const pageTitle = getI18nText(`site.pages.${pageType}`, currentLocale) || currentSiteConfig.title
+
+// Get page-specific description from site config if available
+const pageDescription = currentSiteConfig.pageDescriptions?.[pageType] || description
 const langCode = currentLocale === 'zh-cn' ? 'zh-CN' : 'en'
 ---
 
 <html lang={langCode} class='' transition:animate="fade">
 	<head>
-		<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={pageTitle} currentLocale={currentLocale} />
+		<BaseHead articleDate={articleDate} description={pageDescription} ogImage={ogImage} title={pageTitle} currentLocale={currentLocale} />
 	</head>
 
 	<body class='flex justify-center bg-background'>

@@ -120,7 +120,13 @@ export const siteConfig: LocalizedSiteConfig = {
 				lang: 'en',
 				url: '/'
 			}
-		]
+		],
+		pageDescriptions: {
+			home: '这是赵文光的个人在线简历网站，基于 Astro 构建，支持中英文双语切换。网站完整展示工作经历、教育背景、专业技能、项目成果及资格证书，界面简洁美观，响应式设计适配各种设备，方便查阅与分享。',
+			record: '赵文光的个人时间线记录，包括出生、高考、本科毕业和入职等重要人生节点。展示个人成长历程和关键事件的时间线。',
+			read: '赵文光的阅读书单和书籍推荐，包括《局外人》、《邓小平时代》等经典著作的评分和详细介绍。分享个人阅读体验和书籍评价。',
+			about: '了解本站基于astro-theme-pure主题开发，遵循Apache License 2.0协议，查看详细的修改记录和版权声明。项目来源、许可证信息及主要修改内容介绍。'
+		}
 	},
 	en: {
 		author: 'Zhao Wenguang',
@@ -153,7 +159,13 @@ export const siteConfig: LocalizedSiteConfig = {
 				lang: 'zh-cn',
 				url: '/zh-cn'
 			}
-		]
+		],
+		pageDescriptions: {
+			home: 'Personal online resume website of Zhao Wenguang, built with Astro, supporting both Chinese and English. Features work experience, education, skills, projects and certificates with a clean, responsive design for easy viewing and sharing.',
+			record: 'Personal timeline record of Zhao Wenguang, including birth, college entrance exam, undergraduate graduation and career start. Shows personal growth journey and key life events timeline.',
+			read: 'Reading list and book recommendations by Zhao Wenguang, including classics like The Stranger and Deng Xiaoping and the Transformation of China with ratings and detailed reviews. Shares personal reading experiences.',
+			about: 'Learn about this site built on astro-theme-pure theme, following Apache License 2.0, view detailed modification records and copyright statements. Project source, license information and main modifications.'
+		}
 	}
 }
 

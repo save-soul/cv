@@ -10,8 +10,13 @@ export const i18n = {
   'zh-cn': {
     // 网站信息
     site: {
-      title: '赵文光 | 个人简历',
-      description: '赵文光的个人简历'
+      // 页面特定标题
+      pages: {
+        home: '赵文光 | 个人简历',
+        record: '赵文光 | 个人记录',
+        read: '赵文光 | 阅读书单',
+        about: '赵文光 | 关于本站'
+      }
     },
     // 页脚
     footer: {
@@ -65,8 +70,13 @@ export const i18n = {
   en: {
     // Site information
     site: {
-      title: 'Zhao Wenguang | Resume',
-      description: 'Zhao Wenguang\'s Resume'
+      // Page specific titles
+      pages: {
+        home: 'Zhao Wenguang | Resume',
+        record: 'Zhao Wenguang | Personal Record',
+        read: 'Zhao Wenguang | Reading List',
+        about: 'Zhao Wenguang | About This Site'
+      }
     },
     // Footer
     footer: {

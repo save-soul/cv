@@ -24,7 +24,22 @@ const {
 	meta: { articleDate, description = currentSiteConfig.description, ogImage}
 } = Astro.props
 
-const pageTitle = getI18nText('site.title', currentLocale)
+// Determine page type based on URL path
+const pathname = Astro.url.pathname
+let pageType = 'home'
+
+if (pathname.includes('/record')) {
+  pageType = 'record'
+} else if (pathname.includes('/read')) {
+  pageType = 'read'
+} else if (pathname.includes('/about')) {
+  pageType = 'about'
+} else if (pathname === '/' || pathname === '/zh-cn' || pathname === '/zh-cn/') {
+  pageType = 'home'
+}
+
+// Get page-specific title
+const pageTitle = getI18nText(`site.pages.${pageType}`, currentLocale) || currentSiteConfig.title
 const langCode = currentLocale === 'zh-cn' ? 'zh-CN' : 'en'
 ---
 

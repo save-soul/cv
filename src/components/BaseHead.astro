@@ -18,7 +18,7 @@ const { articleDate, description, ogImage, title, currentLocale } = Astro.props
 const currentSiteConfig = currentLocale ? siteConfig[currentLocale] : siteConfig['zh-cn']
 
 const siteTitle = title || currentSiteConfig.title
-const siteDescription = description || (currentLocale ? getI18nText('site.description', currentLocale) : currentSiteConfig.description)
+const siteDescription = description || currentSiteConfig.description
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 const socialImageURL = new URL(ogImage ? ogImage : '/social-card.png', Astro.url).href
 ---

@@ -26,7 +26,7 @@ const {
 
 // Determine page type based on URL path
 const pathname = Astro.url.pathname
-let pageType: 'home' | 'record' | 'read' | 'about' = 'home'
+let pageType: 'home' | 'record' | 'read' | 'about' | 'now' = 'home'
 
 if (pathname.includes('/record')) {
   pageType = 'record'
@@ -34,6 +34,8 @@ if (pathname.includes('/record')) {
   pageType = 'read'
 } else if (pathname.includes('/about')) {
   pageType = 'about'
+} else if (pathname.includes('/now')) {
+  pageType = 'now'
 } else if (pathname === '/' || pathname === '/zh-cn' || pathname === '/zh-cn/') {
   pageType = 'home'
 }

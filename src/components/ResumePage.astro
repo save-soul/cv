@@ -7,7 +7,7 @@ import PageLayout from '@/layouts/BaseLayout.astro'
 import Section from '@/components/Section.astro'
 import Card from '@/components/Card.astro'
 import Label from '@/components/Label.astro'
-import SkillOrNowLayout from '@/components/SkillOrNowLayout.astro'
+import SkillLayout from '@/components/SkillLayout.astro'
 import { Image } from 'astro:assets'
 import avatar from '@/assets/avatar.png'
 import { getLocalizedResumeConfig, getI18nText, getCurrentLocale } from '@/utils/locale'
@@ -220,36 +220,21 @@ const resumeConfig = getLocalizedResumeConfig(currentLocale)
 		</Section>
 
 		<Section title={getI18nText('sections.skills', currentLocale)}>
-			<SkillOrNowLayout
+			<SkillLayout
 				title={getI18nText('skillCategories.language', currentLocale)}
 				items={resumeConfig.skills.language}
 			/>
-			<SkillOrNowLayout
+			<SkillLayout
 				title={getI18nText('skillCategories.frontend', currentLocale)}
 				items={resumeConfig.skills.frontend}
 			/>
-			<SkillOrNowLayout
+			<SkillLayout
 				title={getI18nText('skillCategories.backend', currentLocale)}
 				items={resumeConfig.skills.backend}
 			/>
-			<SkillOrNowLayout
+			<SkillLayout
 				title={getI18nText('skillCategories.others', currentLocale)}
 				items={resumeConfig.skills.others}
-			/>
-		</Section>
-
-		<Section title={getI18nText('sections.now', currentLocale)}>
-			<SkillOrNowLayout
-				title={getI18nText('nowCategories.address', currentLocale)}
-				item={resumeConfig.now.address}
-			/>
-			<SkillOrNowLayout
-				title={getI18nText('nowCategories.reading', currentLocale)}
-				items={resumeConfig.now.reading}
-			/>
-			<SkillOrNowLayout
-				title={getI18nText('nowCategories.sports', currentLocale)}
-				items={resumeConfig.now.sports}
 			/>
 		</Section>
 	</div>

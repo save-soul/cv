@@ -1,0 +1,25 @@
+---
+// 原项目：astro-theme-pure (Apache-2.0)
+// 原作者：cworld1 (https://github.com/cworld1)
+// 修改记录：
+// 2026-02-16 修改者：重新设计NowLayout组件，使用Button组件，水平排列，有边框
+import Button from './Button.astro'
+import { cn } from '@/utils'
+
+interface Props {
+  title: string
+  items?: string[]
+  item?: string
+  class?: string
+}
+
+const { title, items, item, class: className } = Astro.props
+---
+
+<div class={cn('flex flex-col gap-y-2 md:flex-row md:gap-x-3 md:gap-y-0 w-full', className)}>
+  <h3 class='w-full md:w-1/5 font-medium'>{title}</h3>
+  
+  <div class='flex w-full md:w-4/5 flex-row flex-wrap gap-x-3 gap-y-2'>
+    {items ? items.map((itemText: string) => <Button as='button' title={itemText} style='pill' />) : <Button as='button' title={item} style='pill' />}
+  </div>
+</div>

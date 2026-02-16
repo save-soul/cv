@@ -15,7 +15,8 @@ export const i18n = {
         home: '赵文光 | 个人简历',
         record: '赵文光 | 个人记录',
         read: '赵文光 | 阅读书单',
-        about: '赵文光 | 关于本站'
+        about: '赵文光 | 关于本站',
+        now: '赵文光 | 当前状态'
       }
     },
     // 页脚
@@ -37,6 +38,8 @@ export const i18n = {
       certificates: '证书',
       skills: '技能',
       now: '现在',
+      record: '个人记录',
+      read: '阅读书单',
       contact: '联系方式'
     },
     // 技能子分类
@@ -65,6 +68,19 @@ export const i18n = {
       inDevelopment: '正在开发中……',
       comingSoon: '敬请期待',
       ageUnit: '岁'
+    },
+    // 页面描述文本
+    descriptions: {
+      read: {
+        score: '评分',
+        description: '这里记录了我的阅读书单和书籍推荐'
+      },
+      record: {
+        description: '这里记录了我的个人时间线和重要人生节点'
+      },
+      now: {
+        description: '这里记录了我当前的状态、活动和兴趣'
+      }
     }
   },
   en: {
@@ -75,7 +91,8 @@ export const i18n = {
         home: 'Zhao Wenguang | Resume',
         record: 'Zhao Wenguang | Personal Record',
         read: 'Zhao Wenguang | Reading List',
-        about: 'Zhao Wenguang | About This Site'
+        about: 'Zhao Wenguang | About This Site',
+        now: 'Zhao Wenguang | Current Status'
       }
     },
     // Footer
@@ -97,6 +114,8 @@ export const i18n = {
       certificates: 'Certificates',
       skills: 'Skills',
       now: 'Now',
+      record: 'Personal Record',
+      read: 'Reading List',
       contact: 'Contact'
     },
     // Skill categories
@@ -125,6 +144,19 @@ export const i18n = {
       inDevelopment: 'In Development...',
       comingSoon: 'Coming Soon',
       ageUnit: ' years old'
+    },
+    // Page description texts
+    descriptions: {
+      read: {
+        score: 'Score',
+        description: 'Here I record my reading list and book recommendations'
+      },
+      record: {
+        description: 'Here I record my personal timeline and important life events'
+      },
+      now: {
+        description: 'Here I record my current status, activities and interests'
+      }
     }
   }
 } as const

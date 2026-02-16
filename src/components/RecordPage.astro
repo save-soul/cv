@@ -2,7 +2,7 @@
 import { recordConfig } from '@/site-config'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import RecordCard from '@/components/RecordCard.astro'
-import { getCurrentLocale } from '@/utils/locale'
+import { getCurrentLocale, getI18nText } from '@/utils/locale'
 import type { Locale } from '@/types'
 
 interface Props {
@@ -12,18 +12,28 @@ interface Props {
 const { locale: propLocale } = Astro.props
 const currentLocale = propLocale || getCurrentLocale(Astro.url)
 const recordItems = recordConfig[currentLocale]
+
 ---
 
 <PageLayout meta={{}}>
-	<div class='flex w-full flex-col gap-y-10'>
-		{
-      recordItems.map((item) => (
-        <RecordCard
-          heading={item.title}
-          subheading={item.description}
-          date={item.date}
-        />
-      ))
-    }
+	<div class="w-full py-2">
+		<div class="mb-8">
+			<h2 class="text-2xl font-bold mb-2 text-gray-900 dark:text-gray-100">{getI18nText('sections.record', currentLocale)}</h2>
+			<p class="text-gray-600 dark:text-gray-400">
+				{getI18nText('descriptions.record.description', currentLocale)}
+			</p>
+		</div>
+
+		<div class='flex w-full flex-col gap-y-10'>
+			{
+				recordItems.map((item) => (
+					<RecordCard
+						heading={item.title}
+						subheading={item.description}
+						date={item.date}
+					/>
+				))
+			}
+		</div>
 	</div>
 </PageLayout>

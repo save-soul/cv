@@ -28,6 +28,7 @@ export type SiteConfig = {
 		record: string
 		read: string
 		about: string
+		now: string
 	}
 }
 

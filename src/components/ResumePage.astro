@@ -195,8 +195,8 @@ const resumeConfig = getLocalizedResumeConfig(currentLocale)
 				})
 			}
 			<Card
-				heading="正在开发中……"
-				subheading="敬请期待"
+				heading={getI18nText('common.inDevelopment', currentLocale)}
+				subheading={getI18nText('common.comingSoon', currentLocale)}
 			/>
 		</Section>
 

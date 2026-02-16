@@ -57,7 +57,8 @@ export const i18n = {
       website: '网站',
       github: 'GitHub',
       linkedin: 'LinkedIn',
-      inDevelopment: '正在开发中...',
+      inDevelopment: '正在开发中……',
+      comingSoon: '敬请期待',
       ageUnit: '岁'
     }
   },
@@ -112,6 +113,7 @@ export const i18n = {
       github: 'GitHub',
       linkedin: 'LinkedIn',
       inDevelopment: 'In Development...',
+      comingSoon: 'Coming Soon',
       ageUnit: ' years old'
     }
   }

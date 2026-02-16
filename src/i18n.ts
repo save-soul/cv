@@ -90,7 +90,7 @@ export const i18n = {
       pages: {
         home: 'Zhao Wenguang | Resume',
         record: 'Zhao Wenguang | Personal Record',
-        read: 'Zhao Wenguang | Reading List',
+        read: 'Zhao Wenguang | Read List',
         about: 'Zhao Wenguang | About This Site',
         now: 'Zhao Wenguang | Current Status'
       }
@@ -115,7 +115,7 @@ export const i18n = {
       skills: 'Skills',
       now: 'Now',
       record: 'Personal Record',
-      read: 'Reading List',
+      read: 'Read List',
       contact: 'Contact'
     },
     // Skill categories

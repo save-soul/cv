@@ -1,7 +1,7 @@
 ---
 import { readConfig } from '@/site-config'
 import PageLayout from '@/layouts/BaseLayout.astro'
-import RecordCard from '@/components/RecordCard.astro'
+import ReadCard from '@/components/ReadCard.astro'
 import { getCurrentLocale, getI18nText } from '@/utils/locale'
 import type { Locale } from '@/types'
 
@@ -27,7 +27,7 @@ const readItems = readConfig[currentLocale]
 		<div class='flex w-full flex-col gap-y-10'>
 			{
 				readItems.map((item) => (
-					<RecordCard
+					<ReadCard
 						heading={item.title}
 						subheading={item.description}
 						date={`${getI18nText('descriptions.read.score', currentLocale)}: ${item.score}/10`}

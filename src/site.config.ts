@@ -2,7 +2,7 @@
 // 原作者：cworld1 (https://github.com/cworld1)
 // 修改记录：
 // 2026-02-15 修改者：添加简历配置、国际化站点配置和菜单链接
-import type { ResumeConfig, LocalizedSiteConfig, LocalizedMenuLinks, RecordConfig } from '@/types'
+import type { ResumeConfig, LocalizedSiteConfig, LocalizedMenuLinks, RecordConfig, ReadConfig } from '@/types'
 import type { AstroExpressiveCodeOptions } from 'astro-expressive-code'
 export const recordConfig: RecordConfig = {
 	'zh-cn': [
@@ -50,6 +50,38 @@ export const recordConfig: RecordConfig = {
 		}
 	]
 }
+
+export const readConfig: ReadConfig = {
+	'zh-cn': [
+		{
+			title: "《局外人》",
+			description: "《局外人》是法国作家加缪的成名作，同时也是存在主义文学的杰出作品之一，该书以一种客观记录式的“零度风格”，粗线条地描述了主人公默尔索在荒谬的世界中经历的种种荒谬的事，以及自身的荒诞体验。从参加母亲的葬礼到偶然成了杀人犯，再到被判处死刑，默尔索似乎对一切都无动于衷，他像一个象征性的符号，代表了一种普遍的存在，又像是一个血红色的灯塔，具有高度的警示性。然而，局外人现象的产生无疑是由这个世界本身所孕育的，默尔索的存在有其深刻的外部原因。",
+			score: 10,
+			link: "https://book.douban.com/subject/4908885/"
+		},
+		{
+			title: "《邓小平时代》",
+			description: "邓小平深刻影响了中国历史和世界历史的走向，也改变了每一个当代中国人的命运。解读邓小平的政治生涯及其行为逻辑，就是解读当代中国，解读个人命运背后的历史变局。哈佛大学傅高义教授倾十年心力完成的巨著《邓小平时代》，是对邓小平跌宕起伏的一生以及中国惊险崎岖的改革开放之路的全景式描述。作者以丰富的史料、国内外重要的研究成果、档案资料和为数众多的独家访谈为基础，对邓小平个人性格及执政风格进行了深层分析，并对中国改革开放史进行了完整而独到的阐释。全书人物、事件众多，既有对毛泽东、周恩来、邓小平、陈云等人相互关系的细致解读，又有对三中全会、权力过渡、中美建交、政改试水、经济特区、一国两制、九二南巡等重大事件和决策的深入分析。全书持论严谨、脉络清晰、观点鲜明、叙述生动，力图使人物言行符合历史情境，对改革开放的历史进程亦时有独特看法，引人深思，被誉为邓小平研究“纪念碑式”的著作。读懂《邓小平时代》，读懂这段历史，读懂“仍然生活在邓小平时代”的我们自己的现在和未来。",
+			score: 9.9,
+			link: "https://book.douban.com/subject/20424526/"
+		}
+	],
+	en: [
+		{
+			title: "The Stranger",
+			description: "The Stranger is the debut masterpiece of French writer Albert Camus, as well as one of the seminal works of existentialist literature. Written in an objective, documentary-style \"zero degree style\", the book outlines in broad strokes the absurd events that the protagonist Meursault experiences in an absurd world, along with his own existential experience of the absurd. From attending his mother's funeral, to accidentally becoming a murderer, and then being sentenced to death, Meursault seems indifferent to everything. He acts as a symbolic emblem representing a universal human condition, and also like a blood-red beacon with profound cautionary significance. Yet the emergence of the \"outsider\" phenomenon is undoubtedly bred by the world itself, and Meursault's existence has its deep-seated external causes.",
+			score: 10,
+			link: "https://book.douban.com/subject/4908885/"
+		},
+		{
+			title: "Deng Xiaoping and the Transformation of China",
+			description: `Deng Xiaoping profoundly shaped the course of both Chinese and world history, and transformed the destiny of every Chinese person in the contemporary era. To interpret Deng Xiaoping's political career and the logic behind his actions is to understand contemporary China, as well as the historical upheavals that underlie the fate of individuals. The monumental work Deng Xiaoping and the Transformation of China, completed by Professor Ezra F. Vogel of Harvard University after a decade of painstaking research, delivers a panoramic account of Deng Xiaoping's tumultuous life and China's arduous and eventful journey of reform and opening up. Grounded in a wealth of historical materials, pivotal domestic and overseas research findings, archival documents, and numerous exclusive interviews, the author conducts an in-depth analysis of Deng Xiaoping's personal character and governing style, and presents a comprehensive and original interpretation of the history of China's reform and opening up. Featuring a vast array of figures and events, the book includes a meticulous examination of the relationships between key figures including Mao Zedong, Zhou Enlai, Deng Xiaoping and Chen Yun, as well as in-depth analysis of landmark events and critical decisions: the Third Plenary Session of the 11th Central Committee, the transition of political power, the establishment of China-US diplomatic relations, initial explorations of political reform, the special economic zones, the"one country, two systems"principle, and Deng Xiaoping's southern tour in 1992. With rigorous argumentation, a clear narrative framework, incisive viewpoints and vivid narration, the book strives to root the words and deeds of historical figures in their specific historical context. It consistently offers unique and thought-provoking insights into the historical 进程 of reform and opening up, and has been widely hailed as a"monumental"work in the field of Deng Xiaoping studies. To understand this book is to understand this defining period of history, and to grasp the present and future of ourselves who"still live in the Deng Xiaoping era".`,
+			score: 9.9,
+			link: "https://book.douban.com/subject/20424526/"
+		}
+	]
+}
+
 export const siteConfig: LocalizedSiteConfig = {
 	'zh-cn': {
 		// Used as both a meta property (src/components/BaseHead.astro L:31 + L:49) & the generated satori png (src/pages/og-image/[slug].png.ts)
@@ -57,13 +89,15 @@ export const siteConfig: LocalizedSiteConfig = {
 		// Meta property used to construct the meta title property, found in src/components/BaseHead.astro L:11
 		title: '赵文光 | 个人简历',
 		// Meta property used as the default description meta property
-		description: '赵文光的个人简历',
+		description: '这是赵文光的个人在线简历网站，基于 Astro 构建，支持中英文双语切换。网站完整展示工作经历、教育背景、专业技能、项目成果及资格证书，界面简洁美观，响应式设计适配各种设备，方便查阅与分享。',
 		keywords: [
 			'赵文光',
 			'个人简历',
-			'土木工程',
-			'施工员',
-			'基础设施建设'
+			'在线简历',
+			'简历网站',
+			'Astro简历',
+			'中英文简历',
+			'响应式简历'
 		],
 		year: "2025",
 		// HTML lang property, found in src/layouts/Base.astro L:18
@@ -91,13 +125,15 @@ export const siteConfig: LocalizedSiteConfig = {
 	en: {
 		author: 'Zhao Wenguang',
 		title: 'Zhao Wenguang | Resume',
-		description: 'Resume of Zhao Wenguang',
+		description: 'Personal online resume website of Zhao Wenguang, built with Astro, supporting both Chinese and English. Features work experience, education, skills, projects and certificates with a clean, responsive design for easy viewing and sharing.',
 		keywords: [
 			'Zhao Wenguang',
-			'Resume',
-			'Civil Engineering',
-			'Construction Worker',
-			'Infrastructure Construction'
+			'resume',
+			'online resume',
+			'CV website',
+			'Astro resume',
+			'bilingual resume',
+			'responsive resume'
 		],
 		year: "2025",
 		lang: 'en',
@@ -309,6 +345,11 @@ export const menuLinks: LocalizedMenuLinks = {
 			isBlank: false
 		},
 		{
+			title: '阅读',
+			path: '/zh-cn/read',
+			isBlank: false
+		},
+		{
 			title: '关于',
 			path: '/zh-cn/about',
 			isBlank: false
@@ -323,6 +364,11 @@ export const menuLinks: LocalizedMenuLinks = {
 		{
 			title: 'Record',
 			path: '/record',
+			isBlank: false
+		},
+		{
+			title: 'Read',
+			path: '/read',
 			isBlank: false
 		},
 		{

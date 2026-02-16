@@ -121,3 +121,15 @@ export type RecordConfig = {
 	'zh-cn': LocalizedRecordConfig[]
 	en: LocalizedRecordConfig[]
 }
+
+export type LocalizedReadConfig = {
+	title: string
+	description: string
+	score: number
+	link:string
+}
+
+export type ReadConfig = {
+	'zh-cn': LocalizedReadConfig[]
+	en: LocalizedReadConfig[]
+}

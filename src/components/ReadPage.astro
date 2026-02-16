@@ -1,5 +1,5 @@
 ---
-import { recordConfig } from '@/site-config'
+import { readConfig } from '@/site-config'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import RecordCard from '@/components/RecordCard.astro'
 import { getCurrentLocale } from '@/utils/locale'
@@ -11,17 +11,22 @@ interface Props {
 
 const { locale: propLocale } = Astro.props
 const currentLocale = propLocale || getCurrentLocale(Astro.url)
-const recordItems = recordConfig[currentLocale]
+const readItems = readConfig[currentLocale]
+
+// 根据语言显示不同的评分文本
+const scoreText = currentLocale === 'zh-cn' ? '评分' : 'Score'
 ---
 
 <PageLayout meta={{}}>
 	<div class='flex w-full flex-col gap-y-10'>
 		{
-      recordItems.map((item) => (
+      readItems.map((item) => (
         <RecordCard
           heading={item.title}
           subheading={item.description}
-          date={item.date}
+          date={`${scoreText}: ${item.score}/10`}
+          href={item.link}
+          target="_blank"
         />
       ))
     }

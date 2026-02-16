@@ -24,16 +24,37 @@ const recordItems = recordConfig[currentLocale]
 			</p>
 		</div>
 
-		<div class='flex w-full flex-col gap-y-10'>
-			{
-				recordItems.map((item) => (
-					<RecordCard
-						heading={item.title}
-						subheading={item.description}
-						date={item.date}
-					/>
-				))
-			}
+		{/* Timeline container */}
+		<div class="relative w-full">
+			{/* Vertical timeline line - only visible on large screens */}
+			<div class="hidden lg:block absolute left-[22%] top-0 bottom-0 w-0.5 bg-border -translate-x-1/2"></div>
+			
+			<div class="flex flex-col gap-y-10">
+				{
+					recordItems.map((item, index) => (
+						<div class="relative flex flex-col lg:flex-row lg:items-center">
+							{/* Date section - visible on all screens, left side on large screens */}
+							<div class="w-full lg:w-[22%] lg:pr-8 mb-4 lg:mb-0">
+								<div class="lg:sticky lg:top-8 lg:text-right lg:h-full lg:flex lg:items-center lg:justify-end">
+									<h2 class="text-lg font-semibold text-foreground text-balance">{item.date}</h2>
+								</div>
+							</div>
+							
+							{/* Timeline node - only visible on large screens, vertically centered between date and card */}
+							<div class="hidden lg:flex absolute left-[22%] w-4 h-4 rounded-full bg-card border-2 border-foreground z-10 -translate-x-1/2"></div>
+							
+							{/* Card section - right side on large screens */}
+							<div class="w-full lg:w-[78%] lg:pl-8">
+								<RecordCard
+									heading={item.title}
+									subheading={item.description}
+									date={item.date}
+								/>
+							</div>
+						</div>
+					))
+				}
+			</div>
 		</div>
 	</div>
 </PageLayout>

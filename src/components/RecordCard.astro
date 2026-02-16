@@ -10,9 +10,9 @@ const {
 
 <BaseCard {...restProps} class={cn('relative px-5 py-3', restProps.class)}>
   {date && (
-    <h2 class={cn('mb-3 md:absolute md:mb-0 md:right-5 md:top-3')}>{date}</h2>
+    <h2 class={cn('hidden')}>{date}</h2>
   )}
-  <div class='flex flex-col gap-y-1.5 md:pr-20'>
+  <div class='flex flex-col gap-y-1.5 md:pr-20 lg:pr-0'>
     <slot />
   </div>
 </BaseCard>

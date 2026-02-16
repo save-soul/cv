@@ -75,7 +75,7 @@ export const readConfig: ReadConfig = {
 		},
 		{
 			title: "Deng Xiaoping and the Transformation of China",
-			description: `Deng Xiaoping profoundly shaped the course of both Chinese and world history, and transformed the destiny of every Chinese person in the contemporary era. To interpret Deng Xiaoping's political career and the logic behind his actions is to understand contemporary China, as well as the historical upheavals that underlie the fate of individuals. The monumental work Deng Xiaoping and the Transformation of China, completed by Professor Ezra F. Vogel of Harvard University after a decade of painstaking research, delivers a panoramic account of Deng Xiaoping's tumultuous life and China's arduous and eventful journey of reform and opening up. Grounded in a wealth of historical materials, pivotal domestic and overseas research findings, archival documents, and numerous exclusive interviews, the author conducts an in-depth analysis of Deng Xiaoping's personal character and governing style, and presents a comprehensive and original interpretation of the history of China's reform and opening up. Featuring a vast array of figures and events, the book includes a meticulous examination of the relationships between key figures including Mao Zedong, Zhou Enlai, Deng Xiaoping and Chen Yun, as well as in-depth analysis of landmark events and critical decisions: the Third Plenary Session of the 11th Central Committee, the transition of political power, the establishment of China-US diplomatic relations, initial explorations of political reform, the special economic zones, the"one country, two systems"principle, and Deng Xiaoping's southern tour in 1992. With rigorous argumentation, a clear narrative framework, incisive viewpoints and vivid narration, the book strives to root the words and deeds of historical figures in their specific historical context. It consistently offers unique and thought-provoking insights into the historical 进程 of reform and opening up, and has been widely hailed as a"monumental"work in the field of Deng Xiaoping studies. To understand this book is to understand this defining period of history, and to grasp the present and future of ourselves who"still live in the Deng Xiaoping era".`,
+			description: `Deng Xiaoping profoundly shaped the course of both Chinese and world history, and transformed the fate of every contemporary Chinese citizen. To interpret Deng Xiaoping’s political career and the logic behind his actions is to interpret contemporary China and the historical upheavals that underlie individual destinies. *Deng Xiaoping and the Transformation of China*, the magnum opus by Harvard University Professor Ezra F. Vogel, which took him a decade to complete, offers a panoramic account of Deng’s tumultuous life and China’s arduous and perilous journey of reform and opening-up. Drawing on a wealth of historical materials, important domestic and international research findings, archival documents, and numerous exclusive interviews, the author provides an in-depth analysis of Deng’s personal character and governing style, and offers a comprehensive and original interpretation of China’s history of reform and opening-up. The book features a vast cast of characters and events: it meticulously dissects the intricate relationships among Mao Zedong, Zhou Enlai, Deng Xiaoping, Chen Yun, and other key figures, and delves deeply into major events and pivotal decisions including the Third Plenary Session of the 11th Central Committee, the transition of power, the establishment of diplomatic relations between China and the United States, tentative political reforms, the creation of special economic zones, the “one country, two systems” framework, and Deng’s 1992 Southern Tour. Rigorous in argumentation, clear in structure, distinct in viewpoint, and vivid in narration, the book strives to situate the historical figures’ words and deeds within their proper historical context, and presents unique insights into the historical process of reform and opening-up that provoke profound reflection; it has been hailed as a “monumental” work in Deng Xiaoping studies. To understand *Deng Xiaoping and the Transformation of China* is to understand this pivotal period in history—and to understand our present and future, for we still live in the era shaped by Deng Xiaoping.`,
 			score: 9.9,
 			link: "https://book.douban.com/subject/20424526/"
 		}
@@ -251,6 +251,7 @@ export const resumeConfig: ResumeConfig = {
 		now: {
 			reading: [
 				"《省委班子》[许开祯]",
+				"《一百个人的十年》[冯骥才]"
 			],
 			sports: [
 				"步行", "跑步"
@@ -337,6 +338,7 @@ export const resumeConfig: ResumeConfig = {
 		now: {
 			reading: [
 				"A Provincial Party Committee Team [Xu Kaizhen]",
+				"A Provincial Party Committee Team [Feng Jicai]"
 			],
 			sports: [
 				"hike", "run"

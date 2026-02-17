@@ -57,7 +57,7 @@ export const resumeConfig: ResumeConfig = {
 				description: '普通话水平测试（Putonghua Shuiping Ceshi；PSC）是对应试人运用普通话的规范程度、熟练程度的口语考试。考试形式为口试。普通话水平等级分为三级六等，即一、二、三级，每个级别再分出甲乙两个等次；一级甲等为最高，三级乙等为最低。普通话水平测试不是口才的评定，而是对应试人掌握和运用普通话所达到的规范程度的测查和评定，是应试人的汉语标准语测试。应试人在运用普通话口语进行表达过程中所表现的语音、词汇、语法规范程度，是评定其所达到的水平等级的重要依据。',
 				image: '/src/assets/psc.png',
 				imageAlt: '普通话水平测试等级证书',
-				link: 'https://www.cltt.org/#/webHome'
+				link: 'https://www.cltt.org/'
 			}
 		],
 		skills: {
@@ -134,7 +134,7 @@ export const resumeConfig: ResumeConfig = {
 				description: 'The Putonghua Proficiency Test (PSC) is an oral examination that tests the standardization and proficiency of candidates in using Putonghua. The test format is oral. Putonghua proficiency levels are divided into three levels and six grades, namely levels one, two, and three, with each level further divided into grades A and B; Level 1A is the highest, and Level 3B is the lowest. The Putonghua proficiency test is not an assessment of eloquence, but a test and evaluation of the degree of standardization that candidates achieve in mastering and using Putonghua, which is a test of candidates\' Chinese standard language. The degree of standardization in pronunciation, vocabulary, and grammar that candidates demonstrate in the process of using Putonghua for oral expression is an important basis for evaluating the level they achieve.',
 				image: '/src/assets/psc.png',
 				imageAlt: 'Putonghua Proficiency Test Certificate',
-				link: 'https://www.cltt.org/#/webHome'
+				link: 'https://www.cltt.org/'
 			}
 		],
 		skills: {

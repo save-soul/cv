@@ -1,4 +1,4 @@
-import { siteConfig } from '@/site-config'
+import { siteConfig } from '@/config'
 import type { Locale } from '@/types'
 
 // 默认使用中文配置

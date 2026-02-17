@@ -1,7 +1,7 @@
 ---
 import PageLayout from '@/layouts/BaseLayout.astro'
 import NowLayout from '@/components/NowLayout.astro'
-import { getLocalizedResumeConfig, getI18nText, getCurrentLocale } from '@/utils/locale'
+import { getLocalizedNowConfig, getI18nText, getCurrentLocale } from '@/utils/locale'
 import type { Locale } from '@/types'
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 
 const { locale: propLocale } = Astro.props
 const currentLocale = propLocale || getCurrentLocale(Astro.url)
-const resumeConfig = getLocalizedResumeConfig(currentLocale)
+const nowConfig = getLocalizedNowConfig(currentLocale)
 
 ---
 
@@ -26,15 +26,15 @@ const resumeConfig = getLocalizedResumeConfig(currentLocale)
 		<div class="space-y-8">
 			<NowLayout
 				title={getI18nText('nowCategories.address', currentLocale)}
-				item={resumeConfig.now.address}
+				item={nowConfig.address}
 			/>
 			<NowLayout
 				title={getI18nText('nowCategories.reading', currentLocale)}
-				items={resumeConfig.now.reading}
+				items={nowConfig.reading}
 			/>
 			<NowLayout
 				title={getI18nText('nowCategories.sports', currentLocale)}
-				items={resumeConfig.now.sports}
+				items={nowConfig.sports}
 			/>
 		</div>
 	</div>

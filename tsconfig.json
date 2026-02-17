@@ -12,7 +12,7 @@
 			"@/utils": ["src/utils/index.ts"],
 			"@/utils/*": ["src/utils/*"],
 			"@/types": ["src/types.ts"],
-			"@/site-config": ["src/site.config.ts"],
+			"@/config": ["src/config/index.ts"],
 			"@/i18n": ["src/i18n.ts"]
 		}
 	},

@@ -1,0 +1,28 @@
+// 原项目：astro-theme-pure (Apache-2.0)
+// 原作者：cworld1 (https://github.com/cworld1)
+// 修改记录：
+// 2026-02-17 修改者：从 resume.config.ts 拆分出现在配置
+import type { NowConfig } from '@/types'
+
+export const nowConfig: NowConfig = {
+	'zh-cn': {
+		reading: [
+			"《省委班子》[许开祯]",
+			"《一百个人的十年》[冯骥才]"
+		],
+		sports: [
+			"步行", "跑步"
+		],
+		address: '中国河南省项城市'
+	},
+	en: {
+		reading: [
+			"A Provincial Party Committee Team [Xu Kaizhen]",
+			"A Provincial Party Committee Team [Feng Jicai]"
+		],
+		sports: [
+			"hike", "run"
+		],
+		address: 'Xiangcheng City, Henan Province, China'
+	}
+}

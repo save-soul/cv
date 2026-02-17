@@ -3,15 +3,19 @@
 // 原作者：cworld1 (https://github.com/cworld1)
 // 修改记录：
 // 2026-02-15 修改者：创建简历页面，包含个人信息、工作经历、教育背景等模块
+// 2026-02-17 修改者：修复 avatar.png 动态/静态导入冲突警告
 import PageLayout from '@/layouts/BaseLayout.astro'
 import Section from '@/components/Section.astro'
 import Card from '@/components/Card.astro'
 import Label from '@/components/Label.astro'
 import SkillLayout from '@/components/SkillLayout.astro'
 import { Image } from 'astro:assets'
-import avatar from '@/assets/avatar.png'
+import { getImageGlob, validateImagePath } from '@/utils'
 import { getLocalizedResumeConfig, getI18nText, getCurrentLocale } from '@/utils/locale'
 import type { Locale } from '@/types'
+
+const images = getImageGlob()
+validateImagePath('/src/assets/avatar.png', images)
 
 interface Props {
 	locale?: Locale
@@ -26,7 +30,7 @@ const resumeConfig = getLocalizedResumeConfig(currentLocale)
 	<div class='flex w-full flex-col gap-y-10'>
 		<section class='flex flex-col items-center gap-y-7'>
 			<Image
-				src={avatar}
+				src={images['/src/assets/avatar.png']()}
 				alt='profile photo'
 				class='h-28 w-auto rounded-full bg-[#FFBE98] p-2'
 				loading='eager'

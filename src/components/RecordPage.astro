@@ -1,5 +1,5 @@
 ---
-import { recordConfig } from '@/site-config'
+import { recordConfig } from '@/config'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import RecordCard from '@/components/RecordCard.astro'
 import { getCurrentLocale, getI18nText } from '@/utils/locale'
@@ -31,7 +31,7 @@ const recordItems = recordConfig[currentLocale]
 			
 			<div class="flex flex-col gap-y-10">
 				{
-					recordItems.map((item, index) => (
+					recordItems.map((item) => (
 						<div class="relative flex flex-col lg:flex-row lg:items-center">
 							{/* Date section - visible on all screens, left side on large screens */}
 							<div class="w-full lg:w-[22%] lg:pr-8 mb-4 lg:mb-0">

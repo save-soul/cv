@@ -2,8 +2,9 @@
 // 原作者：cworld1 (https://github.com/cworld1)
 // 修改记录：
 // 2026-02-15 修改者：添加国际化工具函数，支持中英文切换
-import type { Locale, LocalizedResumeConfig } from '@/types'
-import { resumeConfig } from '../site.config'
+// 2026-02-17 修改者：添加获取 now 配置的函数
+import type { Locale, LocalizedResumeConfig, LocalizedNowConfig } from '@/types'
+import { resumeConfig, nowConfig } from '@/config'
 import { i18n, defaultLocale } from '@/i18n'
 
 export function getCurrentLocale(url?: URL): Locale {
@@ -31,6 +32,11 @@ export function getCurrentLocale(url?: URL): Locale {
 export function getLocalizedResumeConfig(locale?: Locale): LocalizedResumeConfig {
   const currentLocale = locale || getCurrentLocale()
   return resumeConfig[currentLocale]
+}
+
+export function getLocalizedNowConfig(locale?: Locale): LocalizedNowConfig {
+  const currentLocale = locale || getCurrentLocale()
+  return nowConfig[currentLocale]
 }
 
 export function getI18nText(key: string, locale?: Locale): string {

@@ -93,11 +93,6 @@ export type LocalizedResumeConfig = {
 		backend: string[]
 		others: string[]
 	}
-	now: {
-		reading: string[]
-		sports: string[]
-		address: string
-	}
 }
 
 export type ResumeConfig = {
@@ -131,7 +126,7 @@ export type RecordConfig = {
 
 export type LocalizedReadConfig = {
 	title: string
-	description: string
+	opinion: string
 	score: number
 	link:string
 }
@@ -139,4 +134,15 @@ export type LocalizedReadConfig = {
 export type ReadConfig = {
 	'zh-cn': LocalizedReadConfig[]
 	en: LocalizedReadConfig[]
+}
+
+export type LocalizedNowConfig = {
+	reading: string[]
+	sports: string[]
+	address: string
+}
+
+export type NowConfig = {
+	'zh-cn': LocalizedNowConfig
+	en: LocalizedNowConfig
 }

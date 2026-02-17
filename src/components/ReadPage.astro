@@ -1,5 +1,5 @@
 ---
-import { readConfig } from '@/site-config'
+import { readConfig } from '@/config'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import ReadCard from '@/components/ReadCard.astro'
 import { getCurrentLocale, getI18nText } from '@/utils/locale'
@@ -29,7 +29,7 @@ const readItems = readConfig[currentLocale]
 				readItems.map((item) => (
 					<ReadCard
 						heading={item.title}
-						subheading={item.description}
+						subheading={item.opinion}
 						date={`${getI18nText('descriptions.read.score', currentLocale)}: ${item.score}/10`}
 						href={item.link}
 						target="_blank"

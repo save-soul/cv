@@ -30,6 +30,19 @@ export type SiteConfig = {
 		about: string
 		now: string
 	}
+	schemaOrg?: {
+		person: {
+			name: string
+			alternateName: string
+			jobTitle: string
+			description: string
+			knowsAbout: string[]
+		}
+		website: {
+			name: string
+			description: string
+		}
+	}
 }
 
 export type LocalizedSiteConfig = {

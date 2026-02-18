@@ -49,6 +49,19 @@ export const siteConfig: LocalizedSiteConfig = {
 			read: '赵文光的阅读书单和书籍推荐，包括《局外人》、《邓小平时代》等经典著作的评分和详细介绍。分享个人阅读体验和书籍评价。',
 			about: '了解本站基于astro-theme-pure主题开发，遵循Apache License 2.0协议，查看详细的修改记录和版权声明。项目来源、许可证信息及主要修改内容介绍。',
 			now: '赵文光的当前状态页面，记录当前阅读的书籍、运动活动和所在地。展示个人当前的生活状态和兴趣爱好。'
+		},
+		schemaOrg: {
+			person: {
+				name: '赵文光',
+				alternateName: 'Zhao Wenguang',
+				jobTitle: '软件工程师',
+				description: '赵文光的个人在线简历网站，基于Astro构建，支持中英文双语。展示工作经历、教育背景、专业技能、项目成果和资格证书，响应式设计适配各种设备。',
+				knowsAbout: ['软件开发', 'Web开发', 'Astro', 'JavaScript', 'TypeScript']
+			},
+			website: {
+				name: '赵文光 | 个人简历',
+				description: '赵文光的个人在线简历网站，基于Astro构建，支持中英文双语。展示工作经历、教育背景、专业技能、项目成果和资格证书，响应式设计适配各种设备。'
+			}
 		}
 	},
 	en: {
@@ -89,6 +102,19 @@ export const siteConfig: LocalizedSiteConfig = {
 			read: 'Reading list and book recommendations by Zhao Wenguang, including classics like The Stranger and Deng Xiaoping and the Transformation of China with ratings and detailed reviews. Shares personal reading experiences.',
 			about: 'Learn about this site built on astro-theme-pure theme, following Apache License 2.0, view detailed modification records and copyright statements. Project source, license information and main modifications.',
 			now: 'Current status page of Zhao Wenguang, recording currently reading books, sports activities and location. Shows personal current life status and interests.'
+		},
+		schemaOrg: {
+			person: {
+				name: 'Zhao Wenguang',
+				alternateName: '赵文光',
+				jobTitle: 'Software Engineer',
+				description: 'Zhao Wenguang\'s online resume built with Astro. Bilingual Chinese/English site showcasing work experience, education, skills, projects, and certificates with responsive design.',
+				knowsAbout: ['Software Development', 'Web Development', 'Astro', 'JavaScript', 'TypeScript']
+			},
+			website: {
+				name: 'Zhao Wenguang | Resume',
+				description: 'Zhao Wenguang\'s online resume built with Astro. Bilingual Chinese/English site showcasing work experience, education, skills, projects, and certificates with responsive design.'
+			}
 		}
 	}
 }

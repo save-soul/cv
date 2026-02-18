@@ -81,6 +81,12 @@ export const i18n = {
       now: {
         description: '这里记录了我当前的状态、活动和兴趣'
       }
+    },
+    // 404页面文本
+    notFound: {
+      title: '404',
+      message: '这里是无边无垠的荒漠',
+      button: '返回首页'
     }
   },
   en: {
@@ -157,6 +163,12 @@ export const i18n = {
       now: {
         description: 'Here I record my current status, activities and interests'
       }
+    },
+    // 404 page texts
+    notFound: {
+      title: '404',
+      message: 'This is an endless desert',
+      button: 'Back to Home'
     }
   }
 } as const

@@ -1,18 +1,24 @@
 ---
 import PageLayout from '@/layouts/BaseLayout.astro'
 import Button from '@/components/Button.astro'
+import { getCurrentLocale, getI18nText } from '@/utils/locale'
 
 const meta = {
 	description: 'Not found',
 	title: '404'
 }
+
+const currentLocale = getCurrentLocale(Astro.url)
+const notFoundTitle = getI18nText('notFound.title', currentLocale)
+const notFoundMessage = getI18nText('notFound.message', currentLocale)
+const notFoundButton = getI18nText('notFound.button', currentLocale)
 ---
 
 <PageLayout meta={meta}>
 	<div class='px-4 py-10 text-center sm:px-6 lg:px-8'>
-		<h1 class='block text-7xl font-bold sm:text-9xl'>404</h1>
-		<p class=''>这里是无边无垠的荒漠</p>
-		<Button title='返回首页' href='/' style='button' class='mt-5'>
+		<h1 class='block text-7xl font-bold sm:text-9xl'>{notFoundTitle}</h1>
+		<p class=''>{notFoundMessage}</p>
+		<Button title={notFoundButton} href='/' style='button' class='mt-5'>
 			<svg
 				xmlns='http://www.w3.org/2000/svg'
 				width='14'

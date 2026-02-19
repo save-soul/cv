@@ -20,6 +20,7 @@ const siteTitle = title || currentSiteConfig.title
 const siteDescription = description || currentSiteConfig.description
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 const socialImageURL = new URL(ogImage ? ogImage : '/social-card.png', Astro.url).href
+
 ---
 
 <meta charset='utf-8' />
@@ -108,44 +109,46 @@ const socialImageURL = new URL(ogImage ? ogImage : '/social-card.png', Astro.url
 <meta content={Astro.generator} name='generator' />
 {/* Schema.org structured data */}
 {
-	currentSiteConfig.schemaOrg && (
-		<script type='application/ld+json' is:inline>
-			{JSON.stringify({
-				"@context": "https://schema.org",
-				"@graph": [
-					{
-						"@type": "Person",
-						"@id": "https://zwg.me/#person",
-						"name": currentSiteConfig.schemaOrg.person.name,
-						"alternateName": currentSiteConfig.schemaOrg.person.alternateName,
-						"url": "https://zwg.me/",
-						"image": "https://zwg.me/favicon/avatar.png",
-						"sameAs": [
-							"https://likeit.dev"
-						],
-						"jobTitle": currentSiteConfig.schemaOrg.person.jobTitle,
-						"description": currentSiteConfig.schemaOrg.person.description,
-						"knowsAbout": currentSiteConfig.schemaOrg.person.knowsAbout,
-						"mainEntityOfPage": {
-							"@type": "WebPage",
-							"@id": "https://zwg.me/"
-						}
-					},
-					{
-						"@type": "WebSite",
-						"@id": "https://zwg.me/#website",
-						"url": "https://zwg.me/",
-						"name": currentSiteConfig.schemaOrg.website.name,
-						"description": currentSiteConfig.schemaOrg.website.description,
-						"publisher": {
-							"@id": "https://zwg.me/#person"
-						},
-						"inLanguage": ["en", "zh-CN"]
+	currentSiteConfig.schemaOrg && (() => {
+		const schemaData = {
+			"@context": "https://schema.org",
+			"@graph": [
+				{
+					"@type": "Person",
+					"@id": "https://zwg.me/#person",
+					"name": currentSiteConfig.schemaOrg.person.name,
+					"alternateName": currentSiteConfig.schemaOrg.person.alternateName,
+					"url": "https://zwg.me/",
+					"image": "https://zwg.me/favicon/avatar.png",
+					"sameAs": [
+						"https://likeit.dev"
+					],
+					"jobTitle": currentSiteConfig.schemaOrg.person.jobTitle,
+					"description": currentSiteConfig.schemaOrg.person.description,
+					"knowsAbout": currentSiteConfig.schemaOrg.person.knowsAbout,
+					"mainEntityOfPage": {
+						"@type": "WebPage",
+						"@id": "https://zwg.me/"
 					}
-				]
-			})}
-		</script>
-	)
+				},
+				{
+					"@type": "WebSite",
+					"@id": "https://zwg.me/#website",
+					"url": "https://zwg.me/",
+					"name": currentSiteConfig.schemaOrg.website.name,
+					"description": currentSiteConfig.schemaOrg.website.description,
+					"publisher": {
+						"@id": "https://zwg.me/#person"
+					},
+					"inLanguage": ["en", "zh-CN"]
+				}
+			]
+		};
+		const jsonString = JSON.stringify(schemaData, null, 2);
+		return (
+			<script type='application/ld+json' set:html={jsonString} is:inline />
+		);
+	})()
 }
 {
 	import.meta.env.PROD && (

@@ -7,7 +7,6 @@ import type { NowConfig } from '@/types'
 export const nowConfig: NowConfig = {
 	'zh-cn': {
 		reading: [
-			"《省委班子》[许开祯]",
 			"《一百个人的十年》[冯骥才]"
 		],
 		sports: [
@@ -17,7 +16,6 @@ export const nowConfig: NowConfig = {
 	},
 	en: {
 		reading: [
-			"A Provincial Party Committee Team [Xu Kaizhen]",
 			"A Provincial Party Committee Team [Feng Jicai]"
 		],
 		sports: [

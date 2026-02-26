@@ -124,7 +124,7 @@ export const resumeConfig: ResumeConfig = {
 				description: 'Chinese version of AstroPaper blog, built with Astro, beautiful, SEO-friendly, more suitable for Chinese users.',
 				image: '',
 				imageAlt: 'AstroPaper Blog Chinese Version',
-				link: 'https://codeberg.org/blue-cape/astro-paper-zh'
+				link: 'https://github.com/save-soul/blog'
 			}
 		],
 		certificates: [

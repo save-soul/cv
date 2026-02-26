@@ -13,7 +13,7 @@ export const nowConfig: NowConfig = {
 		sports: [
 			"步行", "跑步"
 		],
-		address: '中国河南省项城市'
+		address: '中国上海市'
 	},
 	en: {
 		reading: [
@@ -23,6 +23,6 @@ export const nowConfig: NowConfig = {
 		sports: [
 			"hike", "run"
 		],
-		address: 'Xiangcheng City, Henan Province, China'
+		address: 'Shanghai City, China'
 	}
 }

@@ -47,7 +47,7 @@ export const resumeConfig: ResumeConfig = {
 				description: 'AstroPaper博客的中文版，使用Astro构建，美观、SEO友好，更适合中国人使用。',
 				image: '',
 				imageAlt: 'AstroPaper博客中文版',
-				link: 'https://codeberg.org/blue-cape/astro-paper-zh'
+				link: 'https://github.com/save-soul/blog'
 			}
 		],
 		certificates: [

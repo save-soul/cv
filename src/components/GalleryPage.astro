@@ -20,6 +20,16 @@ const getImageUrl = (img: GalleryImage) => {
   }
   return img.src
 }
+
+// 将图片数据传递给前端
+const imagesData = images.map(img => ({
+  title: img.title,
+  description: img.description || '',
+  date: img.date,
+  src: getImageUrl(img),
+  alt: img.alt,
+  tags: img.tags || []
+}))
 ---
 
 <div class="w-full">
@@ -37,9 +47,9 @@ const getImageUrl = (img: GalleryImage) => {
 
   <!-- 标签筛选 -->
   {allTags.length > 0 && (
-    <div class="mb-6 flex flex-wrap gap-2">
+    <div class="mb-6 flex flex-wrap gap-2" id="filter-container">
       <button
-        class="gallery-filter-btn active px-3 py-1 text-sm rounded-full border border-border bg-transparent text-foreground hover:bg-accent transition-colors"
+        class="gallery-filter-btn active px-3 py-1 text-sm rounded-full border border-border bg-accent text-foreground hover:bg-accent/80 transition-colors"
         data-tag="all"
       >
         {locale === 'zh-cn' ? '全部' : 'All'}
@@ -59,8 +69,7 @@ const getImageUrl = (img: GalleryImage) => {
   <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="gallery-grid">
     {images.map((img, index) => (
       <div
-        class="gallery-item group relative aspect-square overflow-hidden rounded-lg bg-muted cursor-pointer"
-        data-tags={img.tags?.join(',') || ''}
+        class="gallery-item group relative aspect-square overflow-hidden rounded-lg bg-muted cursor-pointer transition-opacity duration-300"
         data-index={index}
       >
         <img
@@ -130,49 +139,20 @@ const getImageUrl = (img: GalleryImage) => {
       class="max-h-full max-w-full object-contain"
     />
   </div>
-  <div class="absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-center">
+  <div class="absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-center max-w-[90%]">
     <h3 id="modal-title" class="text-lg font-medium"></h3>
     <p id="modal-description" class="text-sm text-white/80 mt-1"></p>
     <p id="modal-date" class="text-xs text-white/60 mt-1"></p>
   </div>
 </div>
 
-<script>
+<script define:vars={{ imagesData }}>
   // 图片筛选功能
-  const filterBtns = document.querySelectorAll('.gallery-filter-btn')
-  const galleryItems = document.querySelectorAll('.gallery-item')
+  const filterContainer = document.getElementById('filter-container')
+  const galleryGrid = document.getElementById('gallery-grid')
   const emptyState = document.getElementById('gallery-empty')
-
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const tag = btn.getAttribute('data-tag')
-
-      // 更新按钮状态
-      filterBtns.forEach(b => b.classList.remove('active', 'bg-accent'))
-      btn.classList.add('active', 'bg-accent')
-
-      // 筛选图片
-      let visibleCount = 0
-      galleryItems.forEach(item => {
-        const itemTags = item.getAttribute('data-tags') || ''
-        if (tag === 'all' || itemTags.split(',').includes(tag || '')) {
-          (item as HTMLElement).style.display = ''
-          visibleCount++
-        } else {
-          (item as HTMLElement).style.display = 'none'
-        }
-      })
-
-      // 显示空状态
-      if (emptyState) {
-        emptyState.classList.toggle('hidden', visibleCount > 0)
-      }
-    })
-  })
-
-  // 图片预览功能
   const modal = document.getElementById('gallery-modal')
-  const modalImage = document.getElementById('modal-image') as HTMLImageElement
+  const modalImage = document.getElementById('modal-image')
   const modalTitle = document.getElementById('modal-title')
   const modalDescription = document.getElementById('modal-description')
   const modalDate = document.getElementById('modal-date')
@@ -181,78 +161,140 @@ const getImageUrl = (img: GalleryImage) => {
   const modalNext = document.getElementById('modal-next')
 
   let currentIndex = 0
-  const images = Array.from(galleryItems)
+  let currentFilter = 'all'
+  let visibleItems = []
 
-  const openModal = (index: number) => {
+  // 获取当前可见的图片项
+  function getVisibleItems() {
+    return Array.from(galleryGrid.querySelectorAll('.gallery-item:not([style*="display: none"])'))
+  }
+
+  // 筛选功能
+  if (filterContainer) {
+    const filterBtns = filterContainer.querySelectorAll('.gallery-filter-btn')
+    const allItems = Array.from(galleryGrid.querySelectorAll('.gallery-item'))
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tag = btn.getAttribute('data-tag')
+        currentFilter = tag
+
+        // 更新按钮状态
+        filterBtns.forEach(b => {
+          b.classList.remove('active', 'bg-accent')
+          b.classList.add('bg-transparent')
+        })
+        btn.classList.add('active', 'bg-accent')
+        btn.classList.remove('bg-transparent')
+
+        // 筛选图片
+        let visibleCount = 0
+        allItems.forEach(item => {
+          const index = parseInt(item.getAttribute('data-index'))
+          const imgData = imagesData[index]
+          const tags = imgData.tags || []
+          
+          if (tag === 'all' || tags.includes(tag)) {
+            item.style.display = ''
+            visibleCount++
+          } else {
+            item.style.display = 'none'
+          }
+        })
+
+        // 更新可见列表
+        visibleItems = getVisibleItems()
+
+        // 显示空状态
+        if (emptyState) {
+          emptyState.classList.toggle('hidden', visibleCount > 0)
+        }
+      })
+    })
+  }
+
+  // 初始化可见列表
+  visibleItems = getVisibleItems()
+
+  // 打开预览
+  function openModal(index) {
     if (!modal || !modalImage) return
-    const item = images[index]
-    const img = item.querySelector('img')
-    if (img) {
-      modalImage.src = img.src
-      modalImage.alt = img.alt
-    }
-
-    // 获取图片信息
-    const imgData = JSON.parse(item.getAttribute('data-tags') || '{}')
-
-    if (modalTitle) modalTitle.textContent = ''
-    if (modalDescription) modalDescription.textContent = ''
-    if (modalDate) modalDate.textContent = item.getAttribute('data-tags')
+    
+    const item = visibleItems[index]
+    if (!item) return
+    
+    const imgIndex = parseInt(item.getAttribute('data-index'))
+    const imgData = imagesData[imgIndex]
+    
+    modalImage.src = imgData.src
+    modalImage.alt = imgData.alt
+    
+    if (modalTitle) modalTitle.textContent = imgData.title
+    if (modalDescription) modalDescription.textContent = imgData.description || ''
+    if (modalDate) modalDate.textContent = imgData.date
 
     currentIndex = index
     modal.classList.remove('hidden')
     document.body.style.overflow = 'hidden'
   }
 
-  const closeModal = () => {
+  // 关闭预览
+  function closeModal() {
     if (modal) {
       modal.classList.add('hidden')
       document.body.style.overflow = ''
     }
   }
 
-  const showPrev = () => {
-    currentIndex = (currentIndex - 1 + images.length) % images.length
+  // 上一张
+  function showPrev() {
+    currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length
     openModal(currentIndex)
   }
 
-  const showNext = () => {
-    currentIndex = (currentIndex + 1) % images.length
+  // 下一张
+  function showNext() {
+    currentIndex = (currentIndex + 1) % visibleItems.length
     openModal(currentIndex)
   }
 
   // 点击图片打开预览
-  images.forEach((item, index) => {
+  visibleItems.forEach((item, index) => {
     item.addEventListener('click', () => openModal(index))
   })
 
   // 关闭预览
-  modalClose?.addEventListener('click', closeModal)
-  modal?.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal()
-  })
+  if (modalClose) {
+    modalClose.addEventListener('click', closeModal)
+  }
+  
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal()
+    })
+  }
 
   // 上一张/下一张
-  modalPrev?.addEventListener('click', (e) => {
-    e.stopPropagation()
-    showPrev()
-  })
-  modalNext?.addEventListener('click', (e) => {
-    e.stopPropagation()
-    showNext()
-  })
+  if (modalPrev) {
+    modalPrev.addEventListener('click', (e) => {
+      e.stopPropagation()
+      showPrev()
+    })
+  }
+  
+  if (modalNext) {
+    modalNext.addEventListener('click', (e) => {
+      e.stopPropagation()
+      showNext()
+    })
+  }
 
   // 键盘导航
   document.addEventListener('keydown', (e) => {
-    if (modal?.classList.contains('hidden')) return
-    if (e.key === 'Escape') closeModal()
-    if (e.key === 'ArrowLeft') showPrev()
-    if (e.key === 'ArrowRight') showNext()
+    if (modal && !modal.classList.contains('hidden')) {
+      if (e.key === 'Escape') closeModal()
+      if (e.key === 'ArrowLeft') showPrev()
+      if (e.key === 'ArrowRight') showNext()
+    }
   })
 </script>
-
-<style>
-  .gallery-filter-btn.active {
-    @apply bg-accent;
-  }
-</style>

@@ -1,0 +1,159 @@
+---
+// Import the global.css file here so that it is included on
+// all pages through the use of the <BaseHead /> component.
+import '../styles/app.css'
+
+import type { SiteMeta, Locale } from '@/types'
+import { siteConfig } from '@/config'
+
+type Props = SiteMeta & {
+	title?: string
+	currentLocale?: Locale
+}
+
+const { articleDate, description, ogImage, title, currentLocale } = Astro.props
+
+// 获取当前语言的站点配置
+const currentSiteConfig = currentLocale ? siteConfig[currentLocale] : siteConfig['zh-cn']
+
+const siteTitle = title || currentSiteConfig.title
+const siteDescription = description || currentSiteConfig.description
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const socialImageURL = new URL(ogImage ? ogImage : '/social-card.png', Astro.url).href
+
+---
+
+<meta charset='utf-8' />
+<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+<meta content='IE=edge' http-equiv='X-UA-Compatible' />
+<title>{siteTitle}</title>
+
+{/* Icons / Favicon */}
+<link rel='icon' href='/favicon/favicon.ico' sizes='any' />
+<link rel='icon' href='/favicon/android-chrome-192x192.png' sizes='192x192' />
+<link rel='icon' href='/favicon/android-chrome-512x512.png' sizes='512x512' />
+<link rel='apple-touch-icon' sizes='1350x1350' href='/favicon/apple-touch-icon.png' />
+<link rel='manifest' href='/manifest.json' />
+
+{/* Font preloads */}
+<!-- <link rel='preload' href='/fonts/Satoshi-Variable.ttf' as='font' type='font/ttf' crossorigin />
+<link
+	rel='preload'
+	href='/fonts/Satoshi-VariableItalic.ttf'
+	as='font'
+	type='font/ttf'
+	crossorigin
+/>
+<link rel='preload' href='/fonts/ClashDisplay-Variable.ttf' as='font' type='font/ttf' crossorigin /> -->
+
+{/* Canonical URL */}
+<link rel='canonical' href={canonicalURL} />
+
+{/* Primary Meta Tags */}
+<meta content={siteTitle} name='title' />
+<meta content={siteDescription} name='description' />
+<meta content={currentSiteConfig.author} name='author' />
+<meta
+	name='keywords'
+	content={Array.isArray(currentSiteConfig.keywords)
+		? currentSiteConfig.keywords.join(', ')
+		: currentSiteConfig.keywords}
+/>
+<meta name='robots' content='index, follow' />
+
+{/* Theme Colour */}
+<meta content='#ffffff' name='theme-color' />
+
+{/* Open Graph / Facebook */}
+<meta content={articleDate ? 'article' : 'website'} property='og:type' />
+<meta content={siteTitle} property='og:title' />
+<meta content={siteDescription} property='og:description' />
+<meta content={canonicalURL} property='og:url' />
+<meta content={currentSiteConfig.title} property='og:site_name' />
+<meta content={currentSiteConfig.ogLocale} property='og:locale' />
+<meta content={socialImageURL} property='og:image' />
+<meta content='1200' property='og:image:width' />
+<meta content='630' property='og:image:height' />
+{
+	articleDate && (
+		<>
+			<meta content={currentSiteConfig.author} property='article:author' />
+			<meta content={articleDate} property='article:published_time' />
+		</>
+	)
+}
+
+{/* Twitter */}
+<meta content='summary_large_image' property='twitter:card' />
+<meta content={canonicalURL} property='twitter:url' />
+<meta content={siteTitle} property='twitter:title' />
+<meta content={siteDescription} property='twitter:description' />
+<meta content={socialImageURL} property='twitter:image' />
+{/* Hreflang tags for internationalization */}
+{/* Self-referencing hreflang tag */}
+<link href={canonicalURL} hreflang={currentLocale === 'zh-cn' ? 'zh-CN' : 'en'} rel='alternate' />
+{/* Other language versions */}
+{
+	currentSiteConfig.otherLanguages.map((lang) => (
+		<link href={new URL(`${lang.url}`, canonicalURL).href} hreflang={lang.lang} rel='alternate' />
+	))
+}
+{/* x-default tag for default language (English) */}
+<link href={new URL('/', canonicalURL).href} hreflang='x-default' rel='alternate' />
+{/* Sitemap */}
+<link href='/sitemap.xml' rel='sitemap' />
+
+<meta content={Astro.generator} name='generator' />
+{/* Schema.org structured data */}
+{
+	currentSiteConfig.schemaOrg && (() => {
+		const schemaData = {
+			"@context": "https://schema.org",
+			"@graph": [
+				{
+					"@type": "Person",
+					"@id": "https://zwg.me/#person",
+					"name": currentSiteConfig.schemaOrg.person.name,
+					"alternateName": currentSiteConfig.schemaOrg.person.alternateName,
+					"url": "https://zwg.me/",
+					"image": "https://zwg.me/favicon/avatar.png",
+					"sameAs": [
+						"https://likeit.dev"
+					],
+					"jobTitle": currentSiteConfig.schemaOrg.person.jobTitle,
+					"description": currentSiteConfig.schemaOrg.person.description,
+					"knowsAbout": currentSiteConfig.schemaOrg.person.knowsAbout,
+					"mainEntityOfPage": {
+						"@type": "WebPage",
+						"@id": "https://zwg.me/"
+					}
+				},
+				{
+					"@type": "WebSite",
+					"@id": "https://zwg.me/#website",
+					"url": "https://zwg.me/",
+					"name": currentSiteConfig.schemaOrg.website.name,
+					"description": currentSiteConfig.schemaOrg.website.description,
+					"publisher": {
+						"@id": "https://zwg.me/#person"
+					},
+					"inLanguage": ["en", "zh-CN"]
+				}
+			]
+		};
+		const jsonString = JSON.stringify(schemaData, null, 2);
+		return (
+			<script type='application/ld+json' set:html={jsonString} is:inline />
+		);
+	})()
+}
+{
+	import.meta.env.PROD && (
+		<script
+			is:inline
+			defer
+			src='https://cloud.umami.is/script.js'
+			data-website-id={currentSiteConfig.umamiID}
+		/>
+	)
+}

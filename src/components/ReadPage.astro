@@ -1,0 +1,41 @@
+---
+import { readConfig } from '@/config'
+import PageLayout from '@/layouts/BaseLayout.astro'
+import ReadCard from '@/components/ReadCard.astro'
+import { getCurrentLocale, getI18nText } from '@/utils/locale'
+import type { Locale } from '@/types'
+
+interface Props {
+  locale?: Locale
+}
+
+const { locale: propLocale } = Astro.props
+const currentLocale = propLocale || getCurrentLocale(Astro.url)
+const readItems = readConfig[currentLocale]
+
+---
+
+<PageLayout meta={{}}>
+	<div class="w-full py-2">
+		<div class="mb-8">
+			<h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100">{getI18nText('sections.read', currentLocale)}</h1>
+			<p class="text-gray-600 dark:text-gray-400">
+				{getI18nText('descriptions.read.description', currentLocale)}
+			</p>
+		</div>
+
+		<div class='flex w-full flex-col gap-y-10'>
+			{
+				readItems.map((item) => (
+					<ReadCard
+						heading={item.title}
+						subheading={item.opinion}
+						date={`${getI18nText('descriptions.read.score', currentLocale)}: ${item.score}/10`}
+						href={item.link}
+						target="_blank"
+					/>
+				))
+			}
+		</div>
+	</div>
+</PageLayout>

@@ -36,9 +36,6 @@
 		root.classList.toggle('dark')
 	}
 
-	// Initial Setup - 同步执行，避免闪烁
-	setTheme(getUserPref())
-
 	// Listen for theme-change custom event
 	document.addEventListener('theme-change', (e) => {
 		setTheme(e.detail.theme)

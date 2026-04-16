@@ -1,4 +1,9 @@
 // 相册配置类型定义
+
+// 图片排序方式
+export type GallerySortType = 'config' | 'date_desc' | 'date_asc'
+
+// 单张图片配置
 export type GalleryImage = {
   // 图片标题
   title: string
@@ -19,7 +24,20 @@ export type GalleryImage = {
   thumbnail?: string
 }
 
-export type LocalizedGalleryConfig = GalleryImage[]
+// 相册设置
+export type GallerySettings = {
+  // 排序方式：'config' | 'date_desc' | 'date_asc'
+  // - config: 按 gallery.data.ts 中的配置顺序
+  // - date_desc: 按日期降序（最新在前）
+  // - date_asc: 按日期升序（最旧在前）
+  sortBy?: GallerySortType
+}
+
+// 本地化相册配置
+export type LocalizedGalleryConfig = {
+  images: GalleryImage[]
+  settings?: GallerySettings
+}
 
 export type GalleryConfig = {
   'zh-cn': LocalizedGalleryConfig

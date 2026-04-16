@@ -5,26 +5,40 @@
 import type { GalleryConfig } from './gallery.config'
 
 export const galleryConfig: GalleryConfig = {
-  'zh-cn': [
-    {
-      title: '雁荡山之行',
-      description: '项目组织团建，雁荡山一日游',
-      type: 'remote',
-      src: 'https://i.imgant.com/v2/itEu9Gz.jpeg',
-      alt: '雁荡山风景',
-      date: '2026-04-16',
-      tags: ['旅行', '团建']
-    }
-  ],
-  en: [
-    {
-      title: 'Yandang Mountain Trip',
-      description: 'Team building trip to Yandang Mountain',
-      type: 'remote',
-      src: 'https://i.imgant.com/v2/itEu9Gz.jpeg',
-      alt: 'Yandang Mountain scenery',
-      date: '2026-04-16',
-      tags: ['Travel', 'Team Building']
-    }
-  ]
+  'zh-cn': {
+    // 排序方式可选：'config' | 'date_desc' | 'date_asc'
+    // - config: 按下方 images 数组的顺序
+    // - date_desc: 按日期降序（最新在前）
+    // - date_asc: 按日期升序（最旧在前）
+    settings: {
+      sortBy: 'config'
+    },
+    images: [
+      {
+        title: '雁荡山之行',
+        description: '项目组织团建，雁荡山一日游',
+        type: 'remote',
+        src: 'https://i.imgant.com/v2/itEu9Gz.jpeg',
+        alt: '雁荡山风景',
+        date: '2026-04-16',
+        tags: ['旅行', '团建']
+      }
+    ]
+  },
+  en: {
+    settings: {
+      sortBy: 'config'
+    },
+    images: [
+      {
+        title: 'Yandang Mountain Trip',
+        description: 'Team building trip to Yandang Mountain',
+        type: 'remote',
+        src: 'https://i.imgant.com/v2/itEu9Gz.jpeg',
+        alt: 'Yandang Mountain scenery',
+        date: '2026-04-16',
+        tags: ['Travel', 'Team Building']
+      }
+    ]
+  }
 }

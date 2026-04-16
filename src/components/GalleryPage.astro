@@ -1,14 +1,26 @@
 ---
 // 相册页面组件
 import { galleryConfig } from '@/config'
-import type { GalleryImage } from '@/config/gallery.config'
+import type { GalleryImage, GallerySortType } from '@/config/gallery.config'
 
 interface Props {
   locale: 'en' | 'zh-cn'
 }
 
 const { locale } = Astro.props
-const images = galleryConfig[locale]
+const galleryData = galleryConfig[locale]
+
+// 获取配置
+const sortBy = galleryData.settings?.sortBy || 'config'
+let images = [...galleryData.images]
+
+// 根据配置排序
+if (sortBy === 'date_desc') {
+  images.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+} else if (sortBy === 'date_asc') {
+  images.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+}
+// 'config' 顺序则保持原样
 
 // 获取所有唯一标签
 const allTags = [...new Set(images.flatMap(img => img.tags || []))]

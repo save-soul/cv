@@ -182,8 +182,8 @@ const imagesJson = JSON.stringify(images.map(img => ({
     return Array.from(galleryGrid?.querySelectorAll('.gallery-item:not([style*="display: none"])') || []) as HTMLElement[]
   }
 
-  // 筛选功能（单标签模式）
-  let currentTag = 'all'
+  // 筛选功能（多标签模式，支持取消选中）
+  let selectedTags: string[] = []
 
   if (filterContainer) {
     const filterBtns = filterContainer.querySelectorAll('.gallery-filter-btn')
@@ -192,23 +192,37 @@ const imagesJson = JSON.stringify(images.map(img => ({
       btn.addEventListener('click', () => {
         const tag = btn.getAttribute('data-tag') || 'all'
 
-        // 如果点击的是当前标签，切换到全部
-        if (tag === currentTag) {
-          currentTag = 'all'
-        } else {
-          currentTag = tag
-        }
-
-        // 更新按钮状态
-        filterBtns.forEach(b => {
-          if (b.getAttribute('data-tag') === currentTag) {
-            b.classList.add('active', 'bg-accent')
-            b.classList.remove('bg-transparent')
-          } else {
+        if (tag === 'all') {
+          // 点击全部，清除所有选中
+          selectedTags = []
+          filterBtns.forEach(b => {
             b.classList.remove('active', 'bg-accent')
             b.classList.add('bg-transparent')
+          })
+          btn.classList.add('active', 'bg-accent')
+          btn.classList.remove('bg-transparent')
+        } else {
+          // 切换标签选中状态
+          const tagIndex = selectedTags.indexOf(tag)
+          if (tagIndex > -1) {
+            selectedTags.splice(tagIndex, 1)
+            btn.classList.remove('active', 'bg-accent')
+            btn.classList.add('bg-transparent')
+          } else {
+            selectedTags.push(tag)
+            btn.classList.add('active', 'bg-accent')
+            btn.classList.remove('bg-transparent')
           }
-        })
+
+          // 如果没有选中任何标签，自动选中"全部"
+          if (selectedTags.length === 0) {
+            const allBtn = filterContainer.querySelector('[data-tag="all"]')
+            if (allBtn) {
+              allBtn.classList.add('active', 'bg-accent')
+              allBtn.classList.remove('bg-transparent')
+            }
+          }
+        }
 
         // 筛选图片
         let visibleCount = 0
@@ -218,7 +232,9 @@ const imagesJson = JSON.stringify(images.map(img => ({
           const imgData = imagesData[index]
           const tags = imgData.tags || []
           
-          if (currentTag === 'all' || tags.includes(currentTag)) {
+          // 如果没有选中标签或选中"全部"，显示所有
+          // 否则只显示包含任一选中标签的图片
+          if (selectedTags.length === 0 || tags.some((t: string) => selectedTags.includes(t))) {
             item.style.display = ''
             visibleCount++
           } else {

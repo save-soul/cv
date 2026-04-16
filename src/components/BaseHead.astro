@@ -28,19 +28,6 @@ const socialImageURL = new URL(ogImage ? ogImage : '/social-card.png', Astro.url
 <meta content='IE=edge' http-equiv='X-UA-Compatible' />
 <title>{siteTitle}</title>
 
-{/* Prevent FOUC - 内联主题类避免闪烁 */}
-<script is:inline>
-(function() {
-	var theme = localStorage.getItem('theme');
-	if (!theme) {
-		theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-	}
-	if (theme === 'dark') {
-		document.documentElement.classList.add('dark');
-	}
-})();
-</script>
-
 {/* Icons / Favicon */}
 <link rel='icon' href='/favicon/favicon.ico' sizes='any' />
 <link rel='icon' href='/favicon/android-chrome-192x192.png' sizes='192x192' />
@@ -49,8 +36,15 @@ const socialImageURL = new URL(ogImage ? ogImage : '/social-card.png', Astro.url
 <link rel='manifest' href='/manifest.json' />
 
 {/* Font preloads */}
-<link rel='preload' href='/fonts/Satoshi-Variable.ttf' as='font' type='font/ttf' crossorigin />
-<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+<!-- <link rel='preload' href='/fonts/Satoshi-Variable.ttf' as='font' type='font/ttf' crossorigin />
+<link
+	rel='preload'
+	href='/fonts/Satoshi-VariableItalic.ttf'
+	as='font'
+	type='font/ttf'
+	crossorigin
+/>
+<link rel='preload' href='/fonts/ClashDisplay-Variable.ttf' as='font' type='font/ttf' crossorigin /> -->
 
 {/* Canonical URL */}
 <link rel='canonical' href={canonicalURL} />

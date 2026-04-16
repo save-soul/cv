@@ -44,5 +44,5 @@ export default defineConfig({
 			}
 		}
 	},
-	prefetch: false
+	prefetch: true
 })

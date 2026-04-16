@@ -11,7 +11,7 @@ export const galleryConfig: GalleryConfig = {
     // - date_desc: 按日期降序（最新在前）
     // - date_asc: 按日期升序（最旧在前）
     settings: {
-      sortBy: 'config'
+        sortBy: 'date_desc'
     },
     images: [
       {
@@ -20,8 +20,26 @@ export const galleryConfig: GalleryConfig = {
         type: 'remote',
         src: 'https://i.imgant.com/v2/itEu9Gz.jpeg',
         alt: '雁荡山风景',
-        date: '2026-04-16',
+        date: '2023-04-29',
         tags: ['旅行', '团建']
+      },
+      {
+        title: '钱塘江',
+        description: '60公里骑行途中，拍摄于钱塘江大桥之上。',
+        type: 'remote',
+        src: 'https://i.imgant.com/v2/Eq9SaAy.jpeg',
+        alt: '钱塘江',
+        date: '2024-05-03',
+        tags: ['旅行']
+      },
+      {
+        title: '在建中的灵江特大桥',
+        description: '在建的灵江特大桥于晨雾缭绕之中',
+        type: 'remote',
+        src: 'https://i.imgant.com/v2/fkd9kGc.jpeg',
+        alt: '灵江特大桥',
+        date: '2023-01-12',
+        tags: ['工作']
       }
     ]
   },
@@ -36,8 +54,26 @@ export const galleryConfig: GalleryConfig = {
         type: 'remote',
         src: 'https://i.imgant.com/v2/itEu9Gz.jpeg',
         alt: 'Yandang Mountain scenery',
-        date: '2026-04-16',
+        date: '2023-04-29',
         tags: ['Travel', 'Team Building']
+      },
+      {
+        title: 'Qiantang River',
+        description: 'Taken on Qiantang River Bridge during a 60km ride.',
+        type: 'remote',
+        src: 'https://i.imgant.com/v2/Eq9SaAy.jpeg',
+        alt: 'Qiantang River',
+        date: '2024-05-03',
+        tags: ['Travel']
+      },
+      {
+        title: 'Lingjiang Grand Bridge Under Construction',
+        description: 'Lingjiang Grand Bridge under construction amid morning mist.',
+        type: 'remote',
+        src: 'https://i.imgant.com/v2/fkd9kGc.jpeg',
+        alt: 'Lingjiang Grand Bridge',
+        date: '2023-01-12',
+        tags: ['Work']
       }
     ]
   }

@@ -182,30 +182,43 @@ const imagesJson = JSON.stringify(images.map(img => ({
     return Array.from(galleryGrid?.querySelectorAll('.gallery-item:not([style*="display: none"])') || []) as HTMLElement[]
   }
 
-  // 筛选功能
+  // 筛选功能（单标签模式）
+  let currentTag = 'all'
+
   if (filterContainer) {
     const filterBtns = filterContainer.querySelectorAll('.gallery-filter-btn')
 
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        const tag = btn.getAttribute('data-tag')
+        const tag = btn.getAttribute('data-tag') || 'all'
+
+        // 如果点击的是当前标签，切换到全部
+        if (tag === currentTag) {
+          currentTag = 'all'
+        } else {
+          currentTag = tag
+        }
 
         // 更新按钮状态
         filterBtns.forEach(b => {
-          b.classList.remove('active', 'bg-accent')
-          b.classList.add('bg-transparent')
+          if (b.getAttribute('data-tag') === currentTag) {
+            b.classList.add('active', 'bg-accent')
+            b.classList.remove('bg-transparent')
+          } else {
+            b.classList.remove('active', 'bg-accent')
+            b.classList.add('bg-transparent')
+          }
         })
-        btn.classList.add('active', 'bg-accent')
-        btn.classList.remove('bg-transparent')
 
         // 筛选图片
         let visibleCount = 0
-        visibleItems.forEach(item => {
+        const allItems = Array.from(galleryGrid?.querySelectorAll('.gallery-item') || []) as HTMLElement[]
+        allItems.forEach(item => {
           const index = parseInt(item.dataset.index || '0')
           const imgData = imagesData[index]
           const tags = imgData.tags || []
           
-          if (tag === 'all' || tags.includes(tag)) {
+          if (currentTag === 'all' || tags.includes(currentTag)) {
             item.style.display = ''
             visibleCount++
           } else {

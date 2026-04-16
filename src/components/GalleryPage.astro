@@ -33,18 +33,18 @@ const getImageUrl = (img: GalleryImage) => {
   return img.src
 }
 
-// 将图片数据传递给前端
-const imagesData = images.map(img => ({
+// 将图片数据序列化为 JSON
+const imagesJson = JSON.stringify(images.map(img => ({
   title: img.title,
   description: img.description || '',
   date: img.date,
   src: getImageUrl(img),
   alt: img.alt,
   tags: img.tags || []
-}))
+})))
 ---
 
-<div class="w-full">
+<div class="w-full" id="gallery-root" data-images={imagesJson}>
   <!-- 页面标题 -->
   <div class="mb-8">
     <h1 class="text-2xl font-bold text-foreground">
@@ -78,35 +78,7 @@ const imagesData = images.map(img => ({
   )}
 
   <!-- 图片网格 -->
-  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="gallery-grid">
-    {images.map((img, index) => (
-      <div
-        class="gallery-item group relative aspect-square overflow-hidden rounded-lg bg-muted cursor-pointer transition-opacity duration-300"
-        data-index={index}
-      >
-        <img
-          src={getImageUrl(img)}
-          alt={img.alt}
-          class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-          loading="lazy"
-        />
-        <!-- 悬浮遮罩 -->
-        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-2">
-          <h3 class="text-white text-sm font-medium text-center line-clamp-1">
-            {img.title}
-          </h3>
-          {img.description && (
-            <p class="text-white/80 text-xs text-center mt-1 line-clamp-2">
-              {img.description}
-            </p>
-          )}
-          <p class="text-white/60 text-xs mt-2">
-            {img.date}
-          </p>
-        </div>
-      </div>
-    ))}
-  </div>
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="gallery-grid"></div>
 
   <!-- 空状态 -->
   <div id="gallery-empty" class="hidden py-12 text-center">
@@ -158,13 +130,14 @@ const imagesData = images.map(img => ({
   </div>
 </div>
 
-<script is:inline define:vars={{ imagesData }}>
-  // 图片筛选功能
+<script>
+  // 从 DOM 中获取图片数据
+  const galleryRoot = document.getElementById('gallery-root')
   const filterContainer = document.getElementById('filter-container')
   const galleryGrid = document.getElementById('gallery-grid')
   const emptyState = document.getElementById('gallery-empty')
   const modal = document.getElementById('gallery-modal')
-  const modalImage = document.getElementById('modal-image')
+  const modalImage = document.getElementById('modal-image') as HTMLImageElement
   const modalTitle = document.getElementById('modal-title')
   const modalDescription = document.getElementById('modal-description')
   const modalDate = document.getElementById('modal-date')
@@ -172,23 +145,50 @@ const imagesData = images.map(img => ({
   const modalPrev = document.getElementById('modal-prev')
   const modalNext = document.getElementById('modal-next')
 
+  // 解析图片数据
+  const imagesData = JSON.parse(galleryRoot?.dataset.images || '[]')
+  
   let currentIndex = 0
-  let visibleItems = []
+  let visibleItems: HTMLElement[] = []
+
+  // 渲染图片网格
+  function renderGallery() {
+    if (!galleryGrid) return
+    galleryGrid.innerHTML = ''
+    
+    imagesData.forEach((img: { src: string; alt: string; title: string; description: string; date: string; tags: string[] }, index: number) => {
+      const item = document.createElement('div')
+      item.className = 'gallery-item group relative aspect-square overflow-hidden rounded-lg bg-muted cursor-pointer transition-opacity duration-300'
+      item.dataset.index = String(index)
+      
+      item.innerHTML = `
+        <img src="${img.src}" alt="${img.alt}" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" />
+        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-2">
+          <h3 class="text-white text-sm font-medium text-center line-clamp-1">${img.title}</h3>
+          ${img.description ? `<p class="text-white/80 text-xs text-center mt-1 line-clamp-2">${img.description}</p>` : ''}
+          <p class="text-white/60 text-xs mt-2">${img.date}</p>
+        </div>
+      `
+      
+      item.addEventListener('click', () => openModal(index))
+      galleryGrid.appendChild(item)
+    })
+    
+    visibleItems = Array.from(galleryGrid.querySelectorAll('.gallery-item'))
+  }
 
   // 获取当前可见的图片项
   function getVisibleItems() {
-    return Array.from(galleryGrid.querySelectorAll('.gallery-item:not([style*="display: none"])'))
+    return Array.from(galleryGrid?.querySelectorAll('.gallery-item:not([style*="display: none"])') || []) as HTMLElement[]
   }
 
   // 筛选功能
   if (filterContainer) {
     const filterBtns = filterContainer.querySelectorAll('.gallery-filter-btn')
-    const allItems = Array.from(galleryGrid.querySelectorAll('.gallery-item'))
 
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         const tag = btn.getAttribute('data-tag')
-        currentFilter = tag
 
         // 更新按钮状态
         filterBtns.forEach(b => {
@@ -200,8 +200,8 @@ const imagesData = images.map(img => ({
 
         // 筛选图片
         let visibleCount = 0
-        allItems.forEach(item => {
-          const index = parseInt(item.getAttribute('data-index'))
+        visibleItems.forEach(item => {
+          const index = parseInt(item.dataset.index || '0')
           const imgData = imagesData[index]
           const tags = imgData.tags || []
           
@@ -224,17 +224,14 @@ const imagesData = images.map(img => ({
     })
   }
 
-  // 初始化可见列表
-  visibleItems = getVisibleItems()
-
   // 打开预览
-  function openModal(index) {
+  function openModal(index: number) {
     if (!modal || !modalImage) return
     
     const item = visibleItems[index]
     if (!item) return
     
-    const imgIndex = parseInt(item.getAttribute('data-index'))
+    const imgIndex = parseInt(item.dataset.index || '0')
     const imgData = imagesData[imgIndex]
     
     modalImage.src = imgData.src
@@ -269,36 +266,26 @@ const imagesData = images.map(img => ({
     openModal(currentIndex)
   }
 
-  // 点击图片打开预览
-  visibleItems.forEach((item, index) => {
-    item.addEventListener('click', () => openModal(index))
-  })
+  // 初始化
+  renderGallery()
+  visibleItems = getVisibleItems()
 
   // 关闭预览
-  if (modalClose) {
-    modalClose.addEventListener('click', closeModal)
-  }
-  
-  if (modal) {
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal()
-    })
-  }
+  modalClose?.addEventListener('click', closeModal)
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal()
+  })
 
   // 上一张/下一张
-  if (modalPrev) {
-    modalPrev.addEventListener('click', (e) => {
-      e.stopPropagation()
-      showPrev()
-    })
-  }
+  modalPrev?.addEventListener('click', (e) => {
+    e.stopPropagation()
+    showPrev()
+  })
   
-  if (modalNext) {
-    modalNext.addEventListener('click', (e) => {
-      e.stopPropagation()
-      showNext()
-    })
-  }
+  modalNext?.addEventListener('click', (e) => {
+    e.stopPropagation()
+    showNext()
+  })
 
   // 键盘导航
   document.addEventListener('keydown', (e) => {

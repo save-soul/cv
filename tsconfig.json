@@ -5,6 +5,7 @@
 		"allowJs": true,
 		"baseUrl": ".",
 		"lib": ["es2022", "dom", "dom.iterable"],
+		"noUnusedLocals": false,
 		"paths": {
 			"@/assets/*": ["src/assets/*"],
 			"@/components/*": ["src/components/*"],

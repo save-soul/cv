@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro'
 import { i18n } from '@/i18n'
 
-export const GET: APIRoute = ({ params, request }) => {
+export const GET: APIRoute = ({ request }) => {
   // 获取当前语言，如果没有指定则默认为英文
   const url = new URL(request.url)
   const pathname = url.pathname

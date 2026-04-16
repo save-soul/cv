@@ -16,7 +16,8 @@ export const i18n = {
         record: '赵文光 | 个人记录',
         read: '赵文光 | 阅读书单',
         about: '赵文光 | 关于本站',
-        now: '赵文光 | 当前状态'
+        now: '赵文光 | 当前状态',
+        gallery: '赵文光 | 相册'
       }
     },
     // 页脚
@@ -98,7 +99,8 @@ export const i18n = {
         record: 'Zhao Wenguang | Personal Record',
         read: 'Zhao Wenguang | Read List',
         about: 'Zhao Wenguang | About This Site',
-        now: 'Zhao Wenguang | Current Status'
+        now: 'Zhao Wenguang | Current Status',
+        gallery: 'Zhao Wenguang | Gallery'
       }
     },
     // Footer

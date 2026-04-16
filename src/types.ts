@@ -29,6 +29,7 @@ export type SiteConfig = {
 		read: string
 		about: string
 		now: string
+		gallery: string
 	}
 	schemaOrg?: {
 		person: {

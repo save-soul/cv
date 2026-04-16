@@ -12,6 +12,11 @@ export const menuLinks: LocalizedMenuLinks = {
 			isBlank: true
 		},
 		{
+			title: '相册',
+			path: '/zh-cn/gallery',
+			isBlank: false
+		},
+		{
 			title: '记录',
 			path: '/zh-cn/record',
 			isBlank: false
@@ -37,6 +42,11 @@ export const menuLinks: LocalizedMenuLinks = {
 			title: 'Blog',
 			path: 'https://likeit.dev',
 			isBlank: true
+		},
+		{
+			title: 'Gallery',
+			path: '/gallery',
+			isBlank: false
 		},
 		{
 			title: 'Record',

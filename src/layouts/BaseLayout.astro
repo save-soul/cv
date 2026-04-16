@@ -1,0 +1,68 @@
+---
+// 原项目：astro-theme-pure (Apache-2.0)
+// 原作者：cworld1 (https://github.com/cworld1)
+// 修改记录：
+// 2026-02-15 修改者：添加国际化支持，调整布局结构
+import type { SiteMeta } from '@/types'
+
+import BaseHead from '@/components/BaseHead.astro'
+import Footer from '@/components/layout/Footer.astro'
+import Header from '@/components/layout/Header.astro'
+import ThemeProvider from '@/components/ThemeProvider.astro'
+import { getCurrentLocale, getI18nText } from '@/utils/locale'
+
+import { siteConfig } from '@/config'
+
+interface Props {
+	meta: SiteMeta
+}
+
+const currentLocale = getCurrentLocale(Astro.url)
+const currentSiteConfig = siteConfig[currentLocale]
+
+const {
+	meta: { articleDate, description = currentSiteConfig.description, ogImage}
+} = Astro.props
+
+// Determine page type based on URL path
+const pathname = Astro.url.pathname
+let pageType: 'home' | 'record' | 'read' | 'about' | 'now' | 'gallery' = 'home'
+
+if (pathname.includes('/record')) {
+  pageType = 'record'
+} else if (pathname.includes('/read')) {
+  pageType = 'read'
+} else if (pathname.includes('/about')) {
+  pageType = 'about'
+} else if (pathname.includes('/now')) {
+  pageType = 'now'
+} else if (pathname.includes('/gallery')) {
+  pageType = 'gallery'
+} else if (pathname === '/' || pathname === '/zh-cn' || pathname === '/zh-cn/') {
+  pageType = 'home'
+}
+
+// Get page-specific title
+const pageTitle = getI18nText(`site.pages.${pageType}`, currentLocale) || currentSiteConfig.title
+
+// Get page-specific description from site config if available
+const pageDescription = currentSiteConfig.pageDescriptions?.[pageType] || description
+const langCode = currentLocale === 'zh-cn' ? 'zh-CN' : 'en'
+---
+
+<html lang={langCode} class='' transition:animate="fade">
+	<head>
+		<BaseHead articleDate={articleDate} description={pageDescription} ogImage={ogImage} title={pageTitle} currentLocale={currentLocale} />
+	</head>
+
+	<body class='flex justify-center bg-background'>
+		<ThemeProvider />
+		<main
+			class='mx-auto flex min-h-screen w-screen max-w-[60rem] flex-col items-center px-6 pb-10 pt-4 font-satoshi text-[0.92rem] leading-relaxed sm:px-10 lg:px-10'
+		>
+			<Header />
+			<slot />
+			<Footer />
+		</main>
+	</body>
+</html>

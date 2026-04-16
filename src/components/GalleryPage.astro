@@ -1,0 +1,298 @@
+---
+// 相册页面组件
+import { galleryConfig } from '@/config'
+import type { GalleryImage } from '@/config/gallery.config'
+
+interface Props {
+  locale: 'en' | 'zh-cn'
+}
+
+const { locale } = Astro.props
+const galleryData = galleryConfig[locale]
+
+// 获取配置
+const sortBy = galleryData.settings?.sortBy || 'config'
+let images = [...galleryData.images]
+
+// 根据配置排序
+if (sortBy === 'date_desc') {
+  images.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+} else if (sortBy === 'date_asc') {
+  images.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+}
+// 'config' 顺序则保持原样
+
+// 获取所有唯一标签
+const allTags = [...new Set(images.flatMap(img => img.tags || []))]
+
+// 获取图片URL（支持本地和远程）
+const getImageUrl = (img: GalleryImage) => {
+  if (img.type === 'local') {
+    return img.src.startsWith('/') ? img.src : `/images/${img.src}`
+  }
+  return img.src
+}
+
+// 将图片数据序列化为 JSON
+const imagesJson = JSON.stringify(images.map(img => ({
+  title: img.title,
+  description: img.description || '',
+  date: img.date,
+  src: getImageUrl(img),
+  alt: img.alt,
+  tags: img.tags || []
+})))
+---
+
+<div class="w-full" id="gallery-root" data-images={imagesJson}>
+  <!-- 页面标题 -->
+  <div class="mb-8">
+    <h1 class="text-2xl font-bold text-foreground">
+      {locale === 'zh-cn' ? '相册' : 'Gallery'}
+    </h1>
+    <p class="mt-2 text-sm text-muted-foreground">
+      {locale === 'zh-cn'
+        ? '收藏的照片和回忆，记录生活中的美好瞬间'
+        : 'Photos and memories, capturing beautiful moments in life'}
+    </p>
+  </div>
+
+  <!-- 标签筛选 -->
+  {allTags.length > 0 && (
+    <div class="mb-6 flex flex-wrap gap-2" id="filter-container">
+      <button
+        class="gallery-filter-btn active px-3 py-1 text-sm rounded-full border border-border bg-accent text-foreground hover:bg-accent/80 transition-colors"
+        data-tag="all"
+      >
+        {locale === 'zh-cn' ? '全部' : 'All'}
+      </button>
+      {allTags.map(tag => (
+        <button
+          class="gallery-filter-btn px-3 py-1 text-sm rounded-full border border-border bg-transparent text-foreground hover:bg-accent transition-colors"
+          data-tag={tag}
+        >
+          {tag}
+        </button>
+      ))}
+    </div>
+  )}
+
+  <!-- 图片网格 -->
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="gallery-grid"></div>
+
+  <!-- 空状态 -->
+  <div id="gallery-empty" class="hidden py-12 text-center">
+    <p class="text-muted-foreground">
+      {locale === 'zh-cn' ? '暂无相关图片' : 'No images found'}
+    </p>
+  </div>
+</div>
+
+<!-- 图片预览模态框 -->
+<div id="gallery-modal" class="fixed inset-0 z-50 hidden bg-black/90">
+  <button
+    id="modal-close"
+    class="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+  <button
+    id="modal-prev"
+    class="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="15 18 9 12 15 6"></polyline>
+    </svg>
+  </button>
+  <button
+    id="modal-next"
+    class="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </button>
+  <div class="flex h-full items-center justify-center p-4">
+    <img
+      id="modal-image"
+      src=""
+      alt=""
+      class="max-h-full max-w-full object-contain"
+    />
+  </div>
+  <div class="absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-center max-w-[90%]">
+    <h3 id="modal-title" class="text-lg font-medium"></h3>
+    <p id="modal-description" class="text-sm text-white/80 mt-1"></p>
+    <p id="modal-date" class="text-xs text-white/60 mt-1"></p>
+  </div>
+</div>
+
+<script>
+  // 从 DOM 中获取图片数据
+  const galleryRoot = document.getElementById('gallery-root')
+  const filterContainer = document.getElementById('filter-container')
+  const galleryGrid = document.getElementById('gallery-grid')
+  const emptyState = document.getElementById('gallery-empty')
+  const modal = document.getElementById('gallery-modal')
+  const modalImage = document.getElementById('modal-image') as HTMLImageElement
+  const modalTitle = document.getElementById('modal-title')
+  const modalDescription = document.getElementById('modal-description')
+  const modalDate = document.getElementById('modal-date')
+  const modalClose = document.getElementById('modal-close')
+  const modalPrev = document.getElementById('modal-prev')
+  const modalNext = document.getElementById('modal-next')
+
+  // 解析图片数据
+  const imagesData = JSON.parse(galleryRoot?.dataset.images || '[]')
+  
+  let currentIndex = 0
+  let visibleItems: HTMLElement[] = []
+
+  // 渲染图片网格
+  function renderGallery() {
+    if (!galleryGrid) return
+    galleryGrid.innerHTML = ''
+    
+    imagesData.forEach((img: { src: string; alt: string; title: string; description: string; date: string; tags: string[] }, index: number) => {
+      const item = document.createElement('div')
+      item.className = 'gallery-item group relative aspect-square overflow-hidden rounded-lg bg-muted cursor-pointer transition-opacity duration-300'
+      item.dataset.index = String(index)
+      
+      item.innerHTML = `
+        <img src="${img.src}" alt="${img.alt}" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" />
+        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-2">
+          <h3 class="text-white text-sm font-medium text-center line-clamp-1">${img.title}</h3>
+          ${img.description ? `<p class="text-white/80 text-xs text-center mt-1 line-clamp-2">${img.description}</p>` : ''}
+          <p class="text-white/60 text-xs mt-2">${img.date}</p>
+        </div>
+      `
+      
+      item.addEventListener('click', () => openModal(index))
+      galleryGrid.appendChild(item)
+    })
+    
+    visibleItems = Array.from(galleryGrid.querySelectorAll('.gallery-item'))
+  }
+
+  // 获取当前可见的图片项
+  function getVisibleItems() {
+    return Array.from(galleryGrid?.querySelectorAll('.gallery-item:not([style*="display: none"])') || []) as HTMLElement[]
+  }
+
+  // 筛选功能
+  if (filterContainer) {
+    const filterBtns = filterContainer.querySelectorAll('.gallery-filter-btn')
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tag = btn.getAttribute('data-tag')
+
+        // 更新按钮状态
+        filterBtns.forEach(b => {
+          b.classList.remove('active', 'bg-accent')
+          b.classList.add('bg-transparent')
+        })
+        btn.classList.add('active', 'bg-accent')
+        btn.classList.remove('bg-transparent')
+
+        // 筛选图片
+        let visibleCount = 0
+        visibleItems.forEach(item => {
+          const index = parseInt(item.dataset.index || '0')
+          const imgData = imagesData[index]
+          const tags = imgData.tags || []
+          
+          if (tag === 'all' || tags.includes(tag)) {
+            item.style.display = ''
+            visibleCount++
+          } else {
+            item.style.display = 'none'
+          }
+        })
+
+        // 更新可见列表
+        visibleItems = getVisibleItems()
+
+        // 显示空状态
+        if (emptyState) {
+          emptyState.classList.toggle('hidden', visibleCount > 0)
+        }
+      })
+    })
+  }
+
+  // 打开预览
+  function openModal(index: number) {
+    if (!modal || !modalImage) return
+    
+    const item = visibleItems[index]
+    if (!item) return
+    
+    const imgIndex = parseInt(item.dataset.index || '0')
+    const imgData = imagesData[imgIndex]
+    
+    modalImage.src = imgData.src
+    modalImage.alt = imgData.alt
+    
+    if (modalTitle) modalTitle.textContent = imgData.title
+    if (modalDescription) modalDescription.textContent = imgData.description || ''
+    if (modalDate) modalDate.textContent = imgData.date
+
+    currentIndex = index
+    modal.classList.remove('hidden')
+    document.body.style.overflow = 'hidden'
+  }
+
+  // 关闭预览
+  function closeModal() {
+    if (modal) {
+      modal.classList.add('hidden')
+      document.body.style.overflow = ''
+    }
+  }
+
+  // 上一张
+  function showPrev() {
+    currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length
+    openModal(currentIndex)
+  }
+
+  // 下一张
+  function showNext() {
+    currentIndex = (currentIndex + 1) % visibleItems.length
+    openModal(currentIndex)
+  }
+
+  // 初始化
+  renderGallery()
+  visibleItems = getVisibleItems()
+
+  // 关闭预览
+  modalClose?.addEventListener('click', closeModal)
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal()
+  })
+
+  // 上一张/下一张
+  modalPrev?.addEventListener('click', (e) => {
+    e.stopPropagation()
+    showPrev()
+  })
+  
+  modalNext?.addEventListener('click', (e) => {
+    e.stopPropagation()
+    showNext()
+  })
+
+  // 键盘导航
+  document.addEventListener('keydown', (e) => {
+    if (modal && !modal.classList.contains('hidden')) {
+      if (e.key === 'Escape') closeModal()
+      if (e.key === 'ArrowLeft') showPrev()
+      if (e.key === 'ArrowRight') showNext()
+    }
+  })
+</script>

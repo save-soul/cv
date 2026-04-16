@@ -1,0 +1,21 @@
+{
+	"extends": "astro/tsconfigs/strict",
+	"compilerOptions": {
+		"strictNullChecks": true,
+		"allowJs": true,
+		"lib": ["es2022", "dom", "dom.iterable"],
+		"noUnusedLocals": false,
+		"paths": {
+			"@/assets/*": ["./src/assets/*"],
+			"@/components/*": ["./src/components/*"],
+			"@/layouts/*": ["./src/layouts/*"],
+			"@/utils": ["./src/utils/index.ts"],
+			"@/utils/*": ["./src/utils/*"],
+			"@/types": ["./src/types.ts"],
+			"@/config": ["./src/config/index.ts"],
+			"@/config/gallery.config": ["./src/config/gallery.config.ts"],
+			"@/i18n": ["./src/i18n.ts"]
+		}
+	},
+	"exclude": ["node_modules", "**/node_modules/*", ".vscode", "dist"]
+}

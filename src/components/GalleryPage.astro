@@ -1,7 +1,7 @@
 ---
 // 相册页面组件
 import { galleryConfig } from '@/config'
-import type { GalleryImage, GallerySortType } from '@/config/gallery.config'
+import type { GalleryImage } from '@/config/gallery.config'
 
 interface Props {
   locale: 'en' | 'zh-cn'
@@ -158,7 +158,7 @@ const imagesData = images.map(img => ({
   </div>
 </div>
 
-<script define:vars={{ imagesData }}>
+<script is:inline define:vars={{ imagesData }}>
   // 图片筛选功能
   const filterContainer = document.getElementById('filter-container')
   const galleryGrid = document.getElementById('gallery-grid')
@@ -173,7 +173,6 @@ const imagesData = images.map(img => ({
   const modalNext = document.getElementById('modal-next')
 
   let currentIndex = 0
-  let currentFilter = 'all'
   let visibleItems = []
 
   // 获取当前可见的图片项

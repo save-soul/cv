@@ -4,7 +4,6 @@
 // 2026-02-15 修改者：配置国际化支持、Markdown处理和集成插件
 import { defineConfig } from 'astro/config'
 import mdx from '@astrojs/mdx'
-import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
 import { remarkReadingTime } from './src/utils/remarkReadingTime.ts'
 import remarkUnwrapImages from 'remark-unwrap-images'
@@ -26,25 +25,7 @@ export default defineConfig({
 			applyBaseStyles: false
 		}),
 		mdx(),
-		icon(),
-		sitemap({
-			filename: 'sitemap.xml',
-			filter: () => true,
-			customPages: [
-				'https://zwg.me/',
-				'https://zwg.me/about/',
-				'https://zwg.me/gallery/',
-				'https://zwg.me/now/',
-				'https://zwg.me/read/',
-				'https://zwg.me/record/',
-				'https://zwg.me/zh-cn/',
-				'https://zwg.me/zh-cn/about/',
-				'https://zwg.me/zh-cn/gallery/',
-				'https://zwg.me/zh-cn/now/',
-				'https://zwg.me/zh-cn/read/',
-				'https://zwg.me/zh-cn/record/'
-			]
-		})
+		icon()
 	],
 	markdown: {
 		remarkPlugins: [remarkUnwrapImages, remarkReadingTime],

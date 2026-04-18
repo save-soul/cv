@@ -5,6 +5,7 @@
 import { defineConfig } from 'astro/config'
 import mdx from '@astrojs/mdx'
 import tailwind from '@astrojs/tailwind'
+import sitemap from '@astrojs/sitemap'
 import { remarkReadingTime } from './src/utils/remarkReadingTime.ts'
 import remarkUnwrapImages from 'remark-unwrap-images'
 import rehypeExternalLinks from 'rehype-external-links'
@@ -25,7 +26,22 @@ export default defineConfig({
 			applyBaseStyles: false
 		}),
 		mdx(),
-		icon()
+		icon(),
+		sitemap({
+			// 根据 i18n 配置生成多语言 sitemap
+			i18n: {
+				defaultLocale: 'en',
+				locales: {
+					en: 'en-US',
+					'zh-cn': 'zh-CN'
+				}
+			},
+			// 自定义过滤函数，可排除特定页面
+			filter: (page) => {
+				// 排除 manifest.json 等非页面路由
+				return !page.includes('/manifest.json')
+			}
+		})
 	],
 	markdown: {
 		remarkPlugins: [remarkUnwrapImages, remarkReadingTime],

@@ -11,93 +11,100 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
     <div class="mb-8">
       <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100">About This Site</h1>
       <p class="text-gray-600 dark:text-gray-400">
-        Learn about this site built on astro-theme-pure theme, following Apache License 2.0, view detailed modification records and copyright statements.
+        A personal portfolio and resume website showcasing professional journey, skills, and projects.
       </p>
     </div>
     
     <div class="prose dark:prose-invert max-w-none">
+      <!-- Site Overview -->
       <section class="mb-10">
-        <h2 class="text-2xl font-semibold mb-4">Project Source</h2>
+        <h2 class="text-2xl font-semibold mb-4">Welcome</h2>
         <p class="mb-4">
-          This site is built on the <a href="https://github.com/cworld1/astro-theme-pure" target="_blank" class="text-primary underline hover:no-underline">astro-theme-pure</a> theme, an open-source project licensed under <strong>Apache License 2.0</strong>.
+          This is my personal portfolio website, built with modern web technologies to showcase my professional journey, work experience, and personal projects. The site features bilingual support (Chinese/English) and a clean, responsive design.
         </p>
         <p class="mb-4">
-          The original project was created and maintained by <a href="https://github.com/cworld1" target="_blank" class="text-primary underline hover:no-underline">cworld1</a>, providing a clean, modern Astro blog theme foundation.
+          Feel free to explore my <a href="/" class="text-primary underline hover:no-underline">resume</a>, browse through <a href="/gallery" class="text-primary underline hover:no-underline">photo gallery</a>, or check out my <a href="https://likeit.dev" target="_blank" class="text-primary underline hover:no-underline">blog</a> for more content.
         </p>
       </section>
 
+      <!-- Site Features -->
       <section class="mb-10">
-        <h2 class="text-2xl font-semibold mb-4">License Information</h2>
-        <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-          <h3 class="text-xl font-medium mb-3">Apache License 2.0</h3>
-          <p class="mb-4">
-            This project follows the <strong>Apache License 2.0</strong>. This means you can:
-          </p>
-          <ul class="list-disc pl-6 mb-4 space-y-2">
-            <li>Freely use, modify, and distribute the code of this project</li>
-            <li>Use it for personal or commercial purposes</li>
-            <li>Use it closed-source while complying with license requirements</li>
-            <li>Create and distribute derivative works</li>
-          </ul>
-          <p class="mb-4">
-            The complete license text can be viewed on the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" class="text-primary underline hover:no-underline">Apache official website</a>, and a complete <code>LICENSE-APACHE-2.0</code> file is also provided in the project root directory.
-          </p>
+        <h2 class="text-2xl font-semibold mb-4">Features</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-gray-50 dark:bg-gray-800 p-5 rounded-lg">
+            <h3 class="text-lg font-medium mb-2">Bilingual Support</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Seamless Chinese/English switching with full content translation for global accessibility.</p>
+          </div>
+          <div class="bg-gray-50 dark:bg-gray-800 p-5 rounded-lg">
+            <h3 class="text-lg font-medium mb-2">Responsive Design</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Optimized viewing experience across desktop, tablet, and mobile devices.</p>
+          </div>
+          <div class="bg-gray-50 dark:bg-gray-800 p-5 rounded-lg">
+            <h3 class="text-lg font-medium mb-2">Dark/Light Mode</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Automatic theme switching based on your system preferences.</p>
+          </div>
+          <div class="bg-gray-50 dark:bg-gray-800 p-5 rounded-lg">
+            <h3 class="text-lg font-medium mb-2">Fast Performance</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Built with Astro for optimal page load speed and SEO performance.</p>
+          </div>
         </div>
       </section>
 
+      <!-- Tech Stack -->
       <section class="mb-10">
-        <h2 class="text-2xl font-semibold mb-4">Compliance Requirements</h2>
-        <p class="mb-4">
-          According to Apache License 2.0 requirements, we have taken the following measures to ensure compliance:
-        </p>
-        <ul class="list-disc pl-6 mb-4 space-y-2">
-          <li>Retained the complete Apache-2.0 license file</li>
-          <li>Added modification declarations to all modified files</li>
-          <li>Preserved the original author's copyright notices</li>
-          <li>Created a detailed modification record file (MODIFICATIONS.md)</li>
-        </ul>
-      </section>
-
-      <section class="mb-10">
-        <h2 class="text-2xl font-semibold mb-4">Main Modifications</h2>
-        <p class="mb-4">Based on the original theme, we have made the following main modifications:</p>
-        <ul class="list-disc pl-6 mb-4 space-y-2">
-          <li><strong>Internationalization Support</strong>: Added Chinese-English bilingual interface</li>
-          <li><strong>Resume Functionality</strong>: Redesigned professional resume display pages</li>
-          <li><strong>Component Refactoring</strong>: Extracted reusable base components</li>
-          <li><strong>Style Optimization</strong>: Adjusted color schemes and layout design</li>
-          <li><strong>Feature Enhancement</strong>: Added more interactive elements and display components</li>
-          <li><strong>Deployment Configuration</strong>: Optimized Cloudflare Pages deployment configuration</li>
-        </ul>
-        <p>
-          Detailed modification records can be viewed in the <a href="/MODIFICATIONS.md" class="text-primary underline hover:no-underline">MODIFICATIONS.md</a> file.
-        </p>
-      </section>
-
-      <section class="mb-10">
-        <h2 class="text-2xl font-semibold mb-4">Copyright Statement</h2>
-        <div class="border-l-4 border-primary pl-4 py-2">
-          <p class="mb-2">
-            <strong>Original Project Copyright</strong>: The original code of the astro-theme-pure theme is copyrighted by <a href="https://github.com/cworld1" target="_blank" class="text-primary underline hover:no-underline">cworld1</a>.
-          </p>
-          <p class="mb-2">
-            <strong>Modified Parts Copyright</strong>: The modifications and newly added code in this project are copyrighted by the modifier.
-          </p>
-          <p>
-            <strong>License Compliance</strong>: All modifications strictly follow the requirements of the Apache License 2.0 for labeling and declaration.
-          </p>
+        <h2 class="text-2xl font-semibold mb-4">Built With</h2>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">Astro 5</span>
+          <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">React 19</span>
+          <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">TypeScript</span>
+          <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">Tailwind CSS</span>
+          <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">Shiki</span>
+          <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">Umami Analytics</span>
         </div>
       </section>
 
+      <!-- Quick Links -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-semibold mb-4">Explore More</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <a href="/" class="block p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            <h3 class="font-medium mb-1">Resume</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Work experience, education, skills & projects</p>
+          </a>
+          <a href="/gallery" class="block p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            <h3 class="font-medium mb-1">Gallery</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Photo collection and memories</p>
+          </a>
+          <a href="https://likeit.dev" target="_blank" class="block p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            <h3 class="font-medium mb-1">Blog</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Technical articles and thoughts</p>
+          </a>
+        </div>
+      </section>
+
+      <!-- Acknowledgments -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-semibold mb-4">Acknowledgments</h2>
+        <p class="mb-4">
+          This site is built on <a href="https://github.com/cworld1/astro-theme-pure" target="_blank" class="text-primary underline hover:no-underline">astro-theme-pure</a> theme by <a href="https://github.com/cworld1" target="_blank" class="text-primary underline hover:no-underline">cworld1</a>, licensed under Apache License 2.0. Special thanks to the open-source community for providing excellent tools and resources.
+        </p>
+      </section>
+
+      <!-- Contact -->
       <section class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
-        <h2 class="text-2xl font-semibold mb-4">Contact Information</h2>
+        <h2 class="text-2xl font-semibold mb-4">Get in Touch</h2>
         <p class="mb-4">
-          If you have any questions about the use of this project, or need more license information, please contact through the following ways:
+          Interested in collaborating or have questions? Feel free to reach out:
         </p>
         <ul class="list-none space-y-2">
-          <li>📧 Email: Check the resume page for contact information</li>
-          <li>🐙 GitHub: <a href="https://github.com/save-soul/cv" target="_blank" class="text-primary underline hover:no-underline">Project Repository</a></li>
-          <li>📄 License: <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" class="text-primary underline hover:no-underline">Apache License 2.0</a></li>
+          <li>
+            <svg class="inline-block w-5 h-5 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            Check the <a href="/" class="text-primary underline hover:no-underline">resume page</a> for contact information
+          </li>
+          <li>
+            <svg class="inline-block w-5 h-5 mr-2 text-gray-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            <a href="https://github.com/save-soul/cv" target="_blank" class="text-primary underline hover:no-underline">GitHub Repository</a>
+          </li>
         </ul>
       </section>
     </div>

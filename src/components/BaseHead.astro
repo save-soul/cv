@@ -4,7 +4,7 @@
 import '../styles/app.css'
 
 import type { SiteMeta, Locale } from '@/types'
-import { siteConfig } from '@/config'
+import { siteConfig, galleryConfig } from '@/config'
 
 type Props = SiteMeta & {
 	title?: string
@@ -21,6 +21,34 @@ const siteDescription = description || currentSiteConfig.description
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 const socialImageURL = new URL(ogImage ? ogImage : '/social-card.png', Astro.url).href
 
+// 根据页面路径确定页面类型
+const pathname = Astro.url.pathname
+const isGalleryPage = pathname.includes('/gallery')
+const galleryImages = galleryConfig[currentLocale || 'en'].images
+
+// GEO 优化：根据页面类型添加 AI 友好描述
+const pageTypeMap: Record<string, 'home' | 'about' | 'record' | 'read' | 'now' | 'gallery'> = {
+	'/': 'home',
+	'/about': 'about',
+	'/record': 'record',
+	'/read': 'read',
+	'/now': 'now',
+	'/gallery': 'gallery'
+}
+const currentPageKey = Object.keys(pageTypeMap).find(key => pathname.includes(key))
+const aiFriendlyDescription = currentPageKey && currentSiteConfig.pageDescriptions
+	? currentSiteConfig.pageDescriptions[pageTypeMap[currentPageKey]]
+	: siteDescription
+
+// 生成完整的 hreflang 映射
+const allLocaleUrls = [
+	{ lang: 'en', url: '/' },
+	{ lang: 'zh-CN', url: '/zh-cn' }
+]
+const pageLocaleUrls = allLocaleUrls.map(loc => ({
+	...loc,
+	url: loc.url === '/' ? loc.url : `${loc.url}${pathname.replace(/^\/(zh-cn)?/, '')}`
+}))
 ---
 
 <meta charset='utf-8' />
@@ -35,17 +63,6 @@ const socialImageURL = new URL(ogImage ? ogImage : '/social-card.png', Astro.url
 <link rel='apple-touch-icon' sizes='1350x1350' href='/favicon/apple-touch-icon.png' />
 <link rel='manifest' href='/manifest.json' />
 
-{/* Font preloads */}
-<!-- <link rel='preload' href='/fonts/Satoshi-Variable.ttf' as='font' type='font/ttf' crossorigin />
-<link
-	rel='preload'
-	href='/fonts/Satoshi-VariableItalic.ttf'
-	as='font'
-	type='font/ttf'
-	crossorigin
-/>
-<link rel='preload' href='/fonts/ClashDisplay-Variable.ttf' as='font' type='font/ttf' crossorigin /> -->
-
 {/* Canonical URL */}
 <link rel='canonical' href={canonicalURL} />
 
@@ -59,10 +76,12 @@ const socialImageURL = new URL(ogImage ? ogImage : '/social-card.png', Astro.url
 		? currentSiteConfig.keywords.join(', ')
 		: currentSiteConfig.keywords}
 />
-<meta name='robots' content='index, follow' />
+<meta name='robots' content='index, follow, max-image-preview=large, max-snippet=-1, max-video-preview=-1' />
+<meta name='googlebot' content='index, follow' />
 
 {/* Theme Colour */}
-<meta content='#ffffff' name='theme-color' />
+<meta content='#ffffff' name='theme-color' media='(prefers-color-scheme: light)' />
+<meta content='#1a1a1a' name='theme-color' media='(prefers-color-scheme: dark)' />
 
 {/* Open Graph / Facebook */}
 <meta content={articleDate ? 'article' : 'website'} property='og:type' />
@@ -74,6 +93,7 @@ const socialImageURL = new URL(ogImage ? ogImage : '/social-card.png', Astro.url
 <meta content={socialImageURL} property='og:image' />
 <meta content='1200' property='og:image:width' />
 <meta content='630' property='og:image:height' />
+<meta content='image/png' property='og:image:type' />
 {
 	articleDate && (
 		<>
@@ -89,37 +109,38 @@ const socialImageURL = new URL(ogImage ? ogImage : '/social-card.png', Astro.url
 <meta content={siteTitle} property='twitter:title' />
 <meta content={siteDescription} property='twitter:description' />
 <meta content={socialImageURL} property='twitter:image' />
-{/* Hreflang tags for internationalization */}
-{/* Self-referencing hreflang tag */}
-<link href={canonicalURL} hreflang={currentLocale === 'zh-cn' ? 'zh-CN' : 'en'} rel='alternate' />
-{/* Other language versions */}
-{
-	currentSiteConfig.otherLanguages.map((lang) => (
-		<link href={new URL(`${lang.url}`, canonicalURL).href} hreflang={lang.lang} rel='alternate' />
-	))
-}
-{/* x-default tag for default language (English) */}
-<link href={new URL('/', canonicalURL).href} hreflang='x-default' rel='alternate' />
-{/* Sitemap */}
-<link href='/sitemap.xml' rel='sitemap' />
+<meta content='Zhao Wenguang' property='twitter:site' />
 
-<meta content={Astro.generator} name='generator' />
-{/* Schema.org structured data */}
+{/* Hreflang tags for internationalization - Complete mapping for all languages */}
+{pageLocaleUrls.map((loc) => (
+	<link href={new URL(loc.url, canonicalURL).href} hreflang={loc.lang} rel='alternate' />
+))}
+<link href={new URL('/', canonicalURL).href} hreflang='x-default' rel='alternate' />
+
+{/* AI/GEO optimized meta tags */}
+<meta name='ai-content' content={aiFriendlyDescription} />
+<meta name='generator' content={Astro.generator} />
+
+{/* Schema.org structured data - Enhanced for GEO */}
 {
-	currentSiteConfig.schemaOrg && (() => {
-		const schemaData = {
+	currentSiteConfig.schemaOrg && (
+		<script type='application/ld+json' is:inline set:html={JSON.stringify({
 			"@context": "https://schema.org",
 			"@graph": [
+				// Person - Core identity for AI to understand
 				{
 					"@type": "Person",
 					"@id": "https://zwg.me/#person",
 					"name": currentSiteConfig.schemaOrg.person.name,
 					"alternateName": currentSiteConfig.schemaOrg.person.alternateName,
 					"url": "https://zwg.me/",
-					"image": "https://zwg.me/favicon/avatar.png",
-					"sameAs": [
-						"https://likeit.dev"
-					],
+					"image": {
+						"@type": "ImageObject",
+						"url": "https://zwg.me/favicon/avatar.png",
+						"width": 192,
+						"height": 192
+					},
+					"sameAs": ["https://likeit.dev"],
 					"jobTitle": currentSiteConfig.schemaOrg.person.jobTitle,
 					"description": currentSiteConfig.schemaOrg.person.description,
 					"knowsAbout": currentSiteConfig.schemaOrg.person.knowsAbout,
@@ -128,32 +149,103 @@ const socialImageURL = new URL(ogImage ? ogImage : '/social-card.png', Astro.url
 						"@id": "https://zwg.me/"
 					}
 				},
+				// WebSite - With SearchAction for AI-powered search
 				{
 					"@type": "WebSite",
 					"@id": "https://zwg.me/#website",
 					"url": "https://zwg.me/",
 					"name": currentSiteConfig.schemaOrg.website.name,
 					"description": currentSiteConfig.schemaOrg.website.description,
-					"publisher": {
-						"@id": "https://zwg.me/#person"
-					},
-					"inLanguage": ["en", "zh-CN"]
-				}
+					"publisher": {"@id": "https://zwg.me/#person"},
+					"inLanguage": ["en", "zh-CN"],
+					"potentialAction": {
+						"@type": "SearchAction",
+						"target": "https://zwg.me/search?q={search_term_string}",
+						"query-input": "required name=search_term_string"
+					}
+				},
+				// WebPage - Current page with full metadata
+				{
+					"@type": "WebPage",
+					"@id": canonicalURL.href,
+					"url": canonicalURL.href,
+					"name": siteTitle,
+					"description": siteDescription,
+					"isPartOf": {"@id": "https://zwg.me/#website"},
+					"inLanguage": currentLocale === 'zh-cn' ? 'zh-CN' : 'en',
+					"datePublished": articleDate || undefined,
+					...(isGalleryPage && galleryImages.length > 0 ? {
+						"@type": "ImageGallery",
+						"name": siteTitle,
+						"description": siteDescription,
+						"associatedMedia": galleryImages.map(img => ({
+							"@type": "ImageObject",
+							"url": img.src,
+							"name": img.title,
+							"description": img.description || img.title
+						}))
+					} : {})
+				},
+				// BreadcrumbList - For better navigation context
+				{
+					"@type": "BreadcrumbList",
+					"itemListElement": [
+						{
+							"@type": "ListItem",
+							"position": 1,
+							"name": currentLocale === 'zh-cn' ? '首页' : 'Home',
+							"item": "https://zwg.me/"
+						},
+						...(pathname !== '/' ? [{
+							"@type": "ListItem",
+							"position": 2,
+							"name": siteTitle,
+							"item": canonicalURL.href
+						}] : [])
+					]
+				},
+				// FAQ - Common questions for AI to reference
+				...(currentSiteConfig.faq ? [{
+					"@type": "FAQPage",
+					"mainEntity": currentSiteConfig.faq.map(q => ({
+						"@type": "Question",
+						"name": q.question,
+						"acceptedAnswer": {
+							"@type": "Answer",
+							"text": q.answer
+						}
+					}))
+				}] : [])
 			]
-		};
-		const jsonString = JSON.stringify(schemaData, null, 2);
-		return (
-			<script type='application/ld+json' set:html={jsonString} is:inline />
-		);
-	})()
-}
-{
-	import.meta.env.PROD && (
-		<script
-			is:inline
-			defer
-			src='https://cloud.umami.is/script.js'
-			data-website-id={currentSiteConfig.umamiID}
-		/>
+		})} />
 	)
 }
+
+{/* Additional GEO structured data - AboutPage */}
+{
+	currentLocale && pathname.includes('/about') && currentSiteConfig.schemaOrg && (
+		<script type='application/ld+json' is:inline set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "AboutPage",
+			"mainEntity": {
+				"@type": "Person",
+				"name": currentSiteConfig.schemaOrg.person.name,
+				"alternateName": currentSiteConfig.schemaOrg.person.alternateName,
+				"jobTitle": currentSiteConfig.schemaOrg.person.jobTitle,
+				"description": currentSiteConfig.schemaOrg.person.description,
+				"knowsAbout": currentSiteConfig.schemaOrg.person.knowsAbout,
+				"url": "https://zwg.me/"
+			}
+		})} />
+	)
+}
+
+{/* Brand schema for AI recognition */}
+<script type='application/ld+json' is:inline set:html={JSON.stringify({
+	"@context": "https://schema.org",
+	"@type": "Brand",
+	"name": "Zhao Wenguang Portfolio",
+	"description": "Professional portfolio and resume website showcasing software engineering expertise, work experience, and personal projects",
+	"url": "https://zwg.me/",
+	"sameAs": ["https://likeit.dev"]
+})} />

@@ -51,6 +51,24 @@ export const siteConfig: LocalizedSiteConfig = {
 			now: '赵文光的当前状态页面，记录当前阅读的书籍、运动活动和所在地。展示个人当前的生活状态和兴趣爱好。',
 			gallery: '赵文光的个人相册，展示收藏的照片和回忆，记录生活中的美好瞬间。支持本地图片和图床链接两种图片来源方式。'
 		},
+		faq: [
+			{
+				question: '赵文光是做什么工作的？',
+				answer: '赵文光是一名施工员，他在一家施工单位任职。'
+			},
+			{
+				question: '这个网站是用什么技术构建的？',
+				answer: '这个网站使用Astro 5框架构建，支持中英文双语显示，采用响应式设计，适配桌面和移动设备。'
+			},
+			{
+				question: '如何联系赵文光？',
+				answer: '您可以通过网站上的联系方式或社交媒体平台与赵文光取得联系。'
+			},
+			{
+				question: '赵文光有哪些专业技能？',
+				answer: '赵文光擅长软件开发、Web开发、Astro、JavaScript和TypeScript等技术栈。'
+			}
+		],
 		schemaOrg: {
 			person: {
 				name: '赵文光',
@@ -103,8 +121,26 @@ export const siteConfig: LocalizedSiteConfig = {
 			read: 'Reading list and book recommendations by Zhao Wenguang, Shares personal reading experiences.',
 			about: 'Learn about this site built on astro-theme-pure theme, following Apache License 2.0, view detailed modification records and copyright statements. Project source, license information and main modifications.',
 			now: 'Current status page of Zhao Wenguang, recording currently reading books, sports activities and location. Shows personal current life status and interests.',
-						gallery: 'Photo gallery showcasing beautiful moments and memories from Zhao Wenguang.'
+			gallery: 'Photo gallery showcasing beautiful moments and memories from Zhao Wenguang.'
 		},
+		faq: [
+			{
+				question: 'What does Zhao Wenguang do for a living?',
+				answer: 'Zhao Wenguang is a construction foreman working for a construction company.'
+			},
+			{
+				question: 'What technology is this website built with?',
+				answer: 'This website is built using Astro 5 framework, supports bilingual Chinese/English display, and features responsive design that works on both desktop and mobile devices.'
+			},
+			{
+				question: 'How can I contact Zhao Wenguang?',
+				answer: 'You can reach Zhao Wenguang through the contact information on the website or via social media platforms.'
+			},
+			{
+				question: 'What are Zhao Wenguang\'s professional skills?',
+				answer: 'Zhao Wenguang is skilled in software development, web development, Astro, JavaScript, and TypeScript technology stacks.'
+			}
+		],
 		schemaOrg: {
 			person: {
 				name: 'Zhao Wenguang',

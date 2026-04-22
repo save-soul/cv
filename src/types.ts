@@ -31,6 +31,10 @@ export type SiteConfig = {
 		now: string
 		gallery: string
 	}
+	faq?: {
+		question: string
+		answer: string
+	}[]
 	schemaOrg?: {
 		person: {
 			name: string

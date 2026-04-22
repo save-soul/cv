@@ -1,5 +1,11 @@
+# https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Allow: /
+
+# Disallow admin or private areas (if any)
+Disallow: /api/
+Disallow: /_astro/
+Disallow: /404.html
 
 # Sitemap
 Sitemap: https://zwg.me/sitemap.xml

@@ -11,94 +11,100 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
     <div class="mb-8">
       <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100">关于本站</h1>
       <p class="text-gray-600 dark:text-gray-400">
-        了解本站基于astro-theme-pure主题开发，遵循Apache License 2.0协议，查看详细的修改记录和版权声明。
+        个人作品集与简历网站，展示专业历程、技术技能和个人项目。
       </p>
     </div>
     
     <div class="prose dark:prose-invert max-w-none">
+      <!-- 站点介绍 -->
       <section class="mb-10">
-        <h2 class="text-2xl font-semibold mb-4">项目来源</h2>
+        <h2 class="text-2xl font-semibold mb-4">欢迎来访</h2>
         <p class="mb-4">
-          本站基于 <a href="https://github.com/cworld1/astro-theme-pure" target="_blank" class="text-primary underline hover:no-underline">astro-theme-pure</a> 主题开发，这是一个采用 <strong>Apache License 2.0</strong> 协议的开源项目。
+          这是一个个人作品集网站，使用现代 Web 技术构建，用于展示我的职业历程、工作经验和个人项目。网站支持中英文双语切换，界面简洁、响应式设计。
         </p>
         <p class="mb-4">
-          原项目由 <a href="https://github.com/cworld1" target="_blank" class="text-primary underline hover:no-underline">cworld1</a> 创建和维护，提供了简洁、现代的Astro博客主题基础。
+          欢迎浏览我的<a href="/zh-cn" class="text-primary underline hover:no-underline">简历</a>、<a href="/zh-cn/gallery" class="text-primary underline hover:no-underline">相册</a>，或访问我的<a href="https://likeit.dev" target="_blank" class="text-primary underline hover:no-underline">博客</a>了解更多内容。
         </p>
       </section>
 
+      <!-- 功能特点 -->
       <section class="mb-10">
-        <h2 class="text-2xl font-semibold mb-4">许可证信息</h2>
-        <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-          <h3 class="text-xl font-medium mb-3">Apache License 2.0</h3>
-          <p class="mb-4">
-            本项目遵循 <strong>Apache License 2.0</strong> 协议。这意味着您可以：
-          </p>
-          <ul class="list-disc pl-6 mb-4 space-y-2">
-            <li>自由使用、修改和分发本项目的代码</li>
-            <li>用于个人或商业目的</li>
-            <li>在遵守协议要求的前提下闭源使用</li>
-            <li>创建和分发衍生作品</li>
-          </ul>
-          <p class="mb-4">
-            完整的许可证文本可以在 <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" class="text-primary underline hover:no-underline">Apache官网</a> 查看，项目根目录也提供了完整的 <code>LICENSE-APACHE-2.0</code> 文件。
-          </p>
+        <h2 class="text-2xl font-semibold mb-4">功能特点</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-gray-50 dark:bg-gray-800 p-5 rounded-lg">
+            <h3 class="text-lg font-medium mb-2">中英双语</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">无缝的中文/英文切换，全文翻译支持，方便全球访客浏览。</p>
+          </div>
+          <div class="bg-gray-50 dark:bg-gray-800 p-5 rounded-lg">
+            <h3 class="text-lg font-medium mb-2">响应式设计</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">针对桌面、平板和移动设备优化，提供最佳的浏览体验。</p>
+          </div>
+          <div class="bg-gray-50 dark:bg-gray-800 p-5 rounded-lg">
+            <h3 class="text-lg font-medium mb-2">深色/浅色模式</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">根据系统设置自动切换主题，也可手动切换。</p>
+          </div>
+          <div class="bg-gray-50 dark:bg-gray-800 p-5 rounded-lg">
+            <h3 class="text-lg font-medium mb-2">快速加载</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">基于 Astro 构建，确保页面加载速度和 SEO 性能。</p>
+          </div>
         </div>
       </section>
 
+      <!-- 技术栈 -->
       <section class="mb-10">
-        <h2 class="text-2xl font-semibold mb-4">合规要求</h2>
-        <p class="mb-4">
-          根据Apache License 2.0的要求，我们已采取以下措施确保合规：
-        </p>
-        <ul class="list-disc pl-6 mb-4 space-y-2">
-          <li>保留了完整的Apache-2.0许可证文件</li>
-          <li>在所有修改过的文件中添加了修改声明</li>
-          <li>保留了原作者的版权声明</li>
-          <li>在网站页脚明确标注了项目来源和许可证信息</li>
-          <li>创建了详细的修改记录文件（MODIFICATIONS.md）</li>
-        </ul>
-      </section>
-
-      <section class="mb-10">
-        <h2 class="text-2xl font-semibold mb-4">主要修改内容</h2>
-        <p class="mb-4">基于原主题，我们进行了以下主要修改：</p>
-        <ul class="list-disc pl-6 mb-4 space-y-2">
-          <li><strong>国际化支持</strong>：添加了中英文双语界面</li>
-          <li><strong>简历功能</strong>：重新设计了专业的简历展示页面</li>
-          <li><strong>组件重构</strong>：提取了可复用的基础组件</li>
-          <li><strong>样式优化</strong>：调整了颜色方案和布局设计</li>
-          <li><strong>功能增强</strong>：添加了更多交互元素和展示组件</li>
-          <li><strong>部署配置</strong>：优化了Cloudflare Pages部署配置</li>
-        </ul>
-        <p>
-          详细的修改记录请查看 <a href="/MODIFICATIONS.md" class="text-primary underline hover:no-underline">MODIFICATIONS.md</a> 文件。
-        </p>
-      </section>
-
-      <section class="mb-10">
-        <h2 class="text-2xl font-semibold mb-4">版权声明</h2>
-        <div class="border-l-4 border-primary pl-4 py-2">
-          <p class="mb-2">
-            <strong>原项目版权</strong>：astro-theme-pure 主题的原始代码版权归 <a href="https://github.com/cworld1" target="_blank" class="text-primary underline hover:no-underline">cworld1</a> 所有。
-          </p>
-          <p class="mb-2">
-            <strong>修改部分版权</strong>：本项目的修改和新增代码版权归修改者所有。
-          </p>
-          <p>
-            <strong>协议遵循</strong>：所有修改均严格遵循Apache License 2.0协议的要求进行标注和声明。
-          </p>
+        <h2 class="text-2xl font-semibold mb-4">技术栈</h2>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">Astro 5</span>
+          <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">React 19</span>
+          <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">TypeScript</span>
+          <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">Tailwind CSS</span>
+          <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">Shiki</span>
+          <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">Umami Analytics</span>
         </div>
       </section>
 
+      <!-- 快速导航 -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-semibold mb-4">探索更多</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <a href="/zh-cn" class="block p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            <h3 class="font-medium mb-1">在线简历</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">工作经历、教育背景、技能与项目</p>
+          </a>
+          <a href="/zh-cn/gallery" class="block p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            <h3 class="font-medium mb-1">生活相册</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">照片收藏与美好回忆</p>
+          </a>
+          <a href="https://likeit.dev" target="_blank" class="block p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            <h3 class="font-medium mb-1">技术博客</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">技术文章与心得分享</p>
+          </a>
+        </div>
+      </section>
+
+      <!-- 致谢 -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-semibold mb-4">特别感谢</h2>
+        <p class="mb-4">
+          本站点基于 <a href="https://github.com/cworld1/astro-theme-pure" target="_blank" class="text-primary underline hover:no-underline">astro-theme-pure</a> 主题构建，由 <a href="https://github.com/cworld1" target="_blank" class="text-primary underline hover:no-underline">cworld1</a> 开发，采用 Apache License 2.0 开源许可。感谢开源社区提供的优秀工具和资源。
+        </p>
+      </section>
+
+      <!-- 联系方式 -->
       <section class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
-        <h2 class="text-2xl font-semibold mb-4">联系方式</h2>
+        <h2 class="text-2xl font-semibold mb-4">联系我</h2>
         <p class="mb-4">
-          如果您对本项目的使用有任何疑问，或需要了解更多的许可证信息，请通过以下方式联系：
+          有合作意向或任何问题？欢迎通过以下方式联系我：
         </p>
         <ul class="list-none space-y-2">
-          <li>📧 邮箱：查看简历页面获取联系方式</li>
-          <li>🐙 GitHub：<a href="https://github.com/save-soul/cv" target="_blank" class="text-primary underline hover:no-underline">项目仓库</a></li>
-          <li>📄 许可证：<a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" class="text-primary underline hover:no-underline">Apache License 2.0</a></li>
+          <li>
+            <svg class="inline-block w-5 h-5 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            查看<a href="/zh-cn" class="text-primary underline hover:no-underline">简历页面</a>获取联系方式
+          </li>
+          <li>
+            <svg class="inline-block w-5 h-5 mr-2 text-gray-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            <a href="https://github.com/save-soul/cv" target="_blank" class="text-primary underline hover:no-underline">GitHub 项目仓库</a>
+          </li>
         </ul>
       </section>
     </div>

@@ -4,7 +4,7 @@
 import '../styles/app.css'
 
 import type { SiteMeta, Locale } from '@/types'
-import { siteConfig } from '@/config'
+import { siteConfig, galleryConfig } from '@/config'
 
 type Props = SiteMeta & {
 	title?: string
@@ -21,6 +21,10 @@ const siteDescription = description || currentSiteConfig.description
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 const socialImageURL = new URL(ogImage ? ogImage : '/social-card.png', Astro.url).href
 
+// 根据页面路径确定页面类型
+const pathname = Astro.url.pathname
+const isGalleryPage = pathname.includes('/gallery')
+const galleryImages = galleryConfig[currentLocale || 'en'].images
 ---
 
 <meta charset='utf-8' />
@@ -35,17 +39,6 @@ const socialImageURL = new URL(ogImage ? ogImage : '/social-card.png', Astro.url
 <link rel='apple-touch-icon' sizes='1350x1350' href='/favicon/apple-touch-icon.png' />
 <link rel='manifest' href='/manifest.json' />
 
-{/* Font preloads */}
-<!-- <link rel='preload' href='/fonts/Satoshi-Variable.ttf' as='font' type='font/ttf' crossorigin />
-<link
-	rel='preload'
-	href='/fonts/Satoshi-VariableItalic.ttf'
-	as='font'
-	type='font/ttf'
-	crossorigin
-/>
-<link rel='preload' href='/fonts/ClashDisplay-Variable.ttf' as='font' type='font/ttf' crossorigin /> -->
-
 {/* Canonical URL */}
 <link rel='canonical' href={canonicalURL} />
 
@@ -59,10 +52,12 @@ const socialImageURL = new URL(ogImage ? ogImage : '/social-card.png', Astro.url
 		? currentSiteConfig.keywords.join(', ')
 		: currentSiteConfig.keywords}
 />
-<meta name='robots' content='index, follow' />
+<meta name='robots' content='index, follow, max-image-preview=large, max-snippet=-1, max-video-preview=-1' />
+<meta name='googlebot' content='index, follow' />
 
 {/* Theme Colour */}
-<meta content='#ffffff' name='theme-color' />
+<meta content='#ffffff' name='theme-color' media='(prefers-color-scheme: light)' />
+<meta content='#1a1a1a' name='theme-color' media='(prefers-color-scheme: dark)' />
 
 {/* Open Graph / Facebook */}
 <meta content={articleDate ? 'article' : 'website'} property='og:type' />
@@ -74,6 +69,7 @@ const socialImageURL = new URL(ogImage ? ogImage : '/social-card.png', Astro.url
 <meta content={socialImageURL} property='og:image' />
 <meta content='1200' property='og:image:width' />
 <meta content='630' property='og:image:height' />
+<meta content='image/png' property='og:image:type' />
 {
 	articleDate && (
 		<>
@@ -89,25 +85,25 @@ const socialImageURL = new URL(ogImage ? ogImage : '/social-card.png', Astro.url
 <meta content={siteTitle} property='twitter:title' />
 <meta content={siteDescription} property='twitter:description' />
 <meta content={socialImageURL} property='twitter:image' />
+<meta content='Zhao Wenguang' property='twitter:site' />
+
 {/* Hreflang tags for internationalization */}
-{/* Self-referencing hreflang tag */}
 <link href={canonicalURL} hreflang={currentLocale === 'zh-cn' ? 'zh-CN' : 'en'} rel='alternate' />
-{/* Other language versions */}
 {
 	currentSiteConfig.otherLanguages.map((lang) => (
 		<link href={new URL(`${lang.url}`, canonicalURL).href} hreflang={lang.lang} rel='alternate' />
 	))
 }
-{/* x-default tag for default language (English) */}
 <link href={new URL('/', canonicalURL).href} hreflang='x-default' rel='alternate' />
 {/* Sitemap */}
-<link href='/sitemap.xml' rel='sitemap' />
+<link href='/sitemap.xml' rel='sitemap' type='application/xml' />
 
 <meta content={Astro.generator} name='generator' />
+
 {/* Schema.org structured data */}
 {
-	currentSiteConfig.schemaOrg && (() => {
-		const schemaData = {
+	currentSiteConfig.schemaOrg && (
+		<script type='application/ld+json' is:inline set:html={JSON.stringify({
 			"@context": "https://schema.org",
 			"@graph": [
 				{
@@ -116,10 +112,13 @@ const socialImageURL = new URL(ogImage ? ogImage : '/social-card.png', Astro.url
 					"name": currentSiteConfig.schemaOrg.person.name,
 					"alternateName": currentSiteConfig.schemaOrg.person.alternateName,
 					"url": "https://zwg.me/",
-					"image": "https://zwg.me/favicon/avatar.png",
-					"sameAs": [
-						"https://likeit.dev"
-					],
+					"image": {
+						"@type": "ImageObject",
+						"url": "https://zwg.me/favicon/avatar.png",
+						"width": 192,
+						"height": 192
+					},
+					"sameAs": ["https://likeit.dev"],
 					"jobTitle": currentSiteConfig.schemaOrg.person.jobTitle,
 					"description": currentSiteConfig.schemaOrg.person.description,
 					"knowsAbout": currentSiteConfig.schemaOrg.person.knowsAbout,
@@ -134,26 +133,36 @@ const socialImageURL = new URL(ogImage ? ogImage : '/social-card.png', Astro.url
 					"url": "https://zwg.me/",
 					"name": currentSiteConfig.schemaOrg.website.name,
 					"description": currentSiteConfig.schemaOrg.website.description,
-					"publisher": {
-						"@id": "https://zwg.me/#person"
-					},
-					"inLanguage": ["en", "zh-CN"]
+					"publisher": {"@id": "https://zwg.me/#person"},
+					"inLanguage": ["en", "zh-CN"],
+					"potentialAction": {
+						"@type": "SearchAction",
+						"target": "https://zwg.me/search?q={search_term_string}",
+						"query-input": "required name=search_term_string"
+					}
+				},
+				{
+					"@type": "WebPage",
+					"@id": canonicalURL.href,
+					"url": canonicalURL.href,
+					"name": siteTitle,
+					"description": siteDescription,
+					"isPartOf": {"@id": "https://zwg.me/#website"},
+					"inLanguage": currentLocale === 'zh-cn' ? 'zh-CN' : 'en',
+					"datePublished": articleDate || undefined,
+					...(isGalleryPage && galleryImages.length > 0 ? {
+						"@type": "ImageGallery",
+						"name": siteTitle,
+						"description": siteDescription,
+						"associatedMedia": galleryImages.map(img => ({
+							"@type": "ImageObject",
+							"url": img.src,
+							"name": img.title,
+							"description": img.description || img.title
+						}))
+					} : {})
 				}
 			]
-		};
-		const jsonString = JSON.stringify(schemaData, null, 2);
-		return (
-			<script type='application/ld+json' set:html={jsonString} is:inline />
-		);
-	})()
-}
-{
-	import.meta.env.PROD && (
-		<script
-			is:inline
-			defer
-			src='https://cloud.umami.is/script.js'
-			data-website-id={currentSiteConfig.umamiID}
-		/>
+		})} />
 	)
 }

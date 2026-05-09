@@ -1,5 +1,3 @@
-import { fontFamily } from 'tailwindcss/defaultTheme'
-
 /** @type {import('tailwindcss').Config} */
 const config = {
 	darkMode: ['class'],
@@ -59,8 +57,21 @@ const config = {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
-				sans: [...fontFamily.sans],
-				satoshi: ['Satoshi', 'sans'],
+				sans: [
+					'-apple-system',
+					'BlinkMacSystemFont',
+					'Segoe UI',
+					'PingFang SC',
+					'Hiragino Sans GB',
+					'Microsoft YaHei',
+					'Helvetica Neue',
+					'Helvetica',
+					'Arial',
+					'sans-serif',
+					'Apple Color Emoji',
+					'Segoe UI Emoji',
+					'Segoe UI Symbol'
+				]
 			}
 		}
 	}

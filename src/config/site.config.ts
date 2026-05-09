@@ -54,7 +54,7 @@ export const siteConfig: LocalizedSiteConfig = {
 		faq: [
 			{
 				question: '赵文光是做什么工作的？',
-				answer: '赵文光是一名软件工程师，专注于Web开发和现代前端技术。他在一家科技公司担任前端开发工程师。'
+				answer: '赵文光是一名施工员，他在一家施工单位任职。'
 			},
 			{
 				question: '这个网站是用什么技术构建的？',
@@ -126,7 +126,7 @@ export const siteConfig: LocalizedSiteConfig = {
 		faq: [
 			{
 				question: 'What does Zhao Wenguang do for a living?',
-				answer: 'Zhao Wenguang is a software engineer specializing in web development and modern frontend technologies. He works as a frontend developer at a technology company.'
+				answer: 'Zhao Wenguang is a construction foreman working for a construction company.'
 			},
 			{
 				question: 'What technology is this website built with?',

@@ -24,3 +24,5 @@ pnpm-debug.log*
 
 # Preview files
 .preview
+.cozeproj/reduction
+.codegraph

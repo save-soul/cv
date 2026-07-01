@@ -7,22 +7,20 @@ import type { NowConfig } from '@/types'
 export const nowConfig: NowConfig = {
 	'zh-cn': {
 		reading: [
-			"《一百个人的十年》[冯骥才]", 
-			"《中国近百年政治史》[李剑农]"
+			"《怪屋》[阿加莎·克里斯蒂]"
 		],
 		sports: [
-			"步行", "跑步"
+			"步行", "跑步", "力量训练"
 		],
 		address: '中国上海市'
 	},
 	en: {
 		reading: [
-			"A Provincial Party Committee Team [Feng Jicai]",
-			"The Political History of China, 1840–1928[Li Jiannong]"
+			"Crooked House [Agatha Christie]"
 		],
 		sports: [
-			"hike", "run"
+			"walking", "running", "strength training"
 		],
-		address: 'Shanghai City, China'
+		address: 'Shanghai, China'
 	}
 }

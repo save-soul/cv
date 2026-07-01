@@ -15,6 +15,8 @@ export const readConfig: ReadConfig = {
     {
       title:"《汴京之围》",
       opinion:"讲述了北宋如何在3年内从奢侈繁华到靖康之耻的过程，相对来说没那么枯燥，可以详细了解这段历史。可惜本书主要讲述靖康之耻，北宋灭亡，两帝北上后的南宋建立过程一笔带过。"
+      score: 9.5,
+      link: "https://book.douban.com/subject/34433981/"
     }
 	],
 	en: [
@@ -27,7 +29,8 @@ export const readConfig: ReadConfig = {
     {
       title: "1126 Bianjing: Foreign Affairs, Wars and People of the Late Northern Song Dynasty",
       opinion: `It depicts how the prosperous Northern Song Dynasty collapsed into the Jingkang Humiliation within just three years. The narrative is far from tedious and offers a thorough look into this chapter of history. Regrettably, the book centers heavily on the fall of Bianjing and the Northern Song’s demise, barely touching on the establishment of the Southern Song after the two emperors were captured and exiled northward.`,
-      score: null
+      score: 9.5,
+      link: "https://book.douban.com/subject/34433981/"
     }
 	]
 }
